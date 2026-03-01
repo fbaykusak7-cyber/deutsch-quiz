@@ -6,10 +6,9 @@
 <title>Deutsch Quiz</title>
 
 <style>
-
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
   background:linear-gradient(135deg,#1e3c72,#2a5298);
   display:flex;
   justify-content:center;
@@ -19,51 +18,49 @@ body{
 
 .card{
   background:white;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.3);
   width:95%;
-  max-width:800px;
+  max-width:700px;
   padding:25px;
+  border-radius:15px;
   text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
 }
 
 @media(min-width:900px){
   .card{padding:40px;}
-  h2{font-size:38px;}
+  h2{font-size:36px;}
 }
 
-.catbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  margin-bottom:15px;
-}
-
-.cat{
-  padding:6px 10px;
+button{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:none;
   border-radius:8px;
-  text-decoration:none;
-  background:#eef2ff;
-  color:#1f2a44;
-  font-size:14px;
-  font-weight:600;
-}
-
-.cat.active{
   background:#2a5298;
   color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.stats{
-  font-size:14px;
-  margin-bottom:15px;
+button:active{
+  transform:scale(0.97);
 }
+
+.feedback{
+  margin:10px 0;
+  font-weight:bold;
+  font-size:20px;
+  height:28px;
+}
+
+.correct{ color:#1db954; }
+.wrong{ color:#e63946; }
 
 .score{
-  font-weight:bold;
   display:inline-block;
   transition:0.3s;
+  font-weight:bold;
 }
 
 .bounce{
@@ -75,34 +72,6 @@ body{
   50%{transform:scale(1.4);}
   100%{transform:scale(1);}
 }
-
-button.answer{
-  width:100%;
-  padding:14px;
-  margin-top:8px;
-  border:none;
-  border-radius:10px;
-  background:#2a5298;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.feedback{
-  height:24px;
-  margin:8px 0;
-  font-weight:bold;
-  font-size:16px;
-}
-
-.correct{
-  color:#1db954;
-}
-
-.wrong{
-  color:#e63946;
-}
-
 </style>
 </head>
 
@@ -110,29 +79,19 @@ button.answer{
 
 <div class="card">
 
-<div class="catbar">
-<a class="cat {% if selected_level=='a1' %}active{% endif %}" href="/set/a1">A1</a>
-<a class="cat {% if selected_level=='a2' %}active{% endif %}" href="/set/a2">A2</a>
-<a class="cat {% if selected_level=='hotel' %}active{% endif %}" href="/set/hotel">Hotel</a>
-<a class="cat {% if selected_level=='verb' %}active{% endif %}" href="/set/verb">Verb</a>
-<a class="cat {% if selected_level=='pronouns' %}active{% endif %}" href="/set/pronouns">Pronouns</a>
-<a class="cat {% if selected_level=='mixed' %}active{% endif %}" href="/set/mixed">Mixed</a>
-<a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong</a>
-</div>
-
-<div class="stats">
-Category: {{selected_level.upper()}} |
-Level {{level_number}} |
-XP {{xp}} |
-Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
+<div>
+Score: <span id="scoreValue" class="score">{{score}}</span> / {{total}}
 </div>
 
 <h2 id="word">{{german}}</h2>
+
+<button onclick="speakWord()">🔊 Listen</button>
+
 <div id="fb" class="feedback"></div>
 
 <form method="post">
 {% for o in options %}
-<button class="answer" type="submit" name="answer" value="{{o}}">{{o}}</button>
+<button type="submit" name="answer" value="{{o}}">{{o}}</button>
 {% endfor %}
 </form>
 
@@ -140,82 +99,52 @@ Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
 
 <script>
 
-let audioUnlocked=false;
+/* === Listen (TTS) === */
+function speakWord(){
+  const text=document.getElementById("word").innerText;
 
-function unlockAudio(){
-  if(audioUnlocked) return;
-  const ctx=new (window.AudioContext||window.webkitAudioContext)();
-  ctx.resume();
-  audioUnlocked=true;
-}
+  if(!('speechSynthesis' in window)) return;
 
-document.addEventListener("touchstart",unlockAudio,{once:true});
-document.addEventListener("click",unlockAudio,{once:true});
-
-function speak(text){
-  if(!audioUnlocked) return;
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.lang="de-DE";
+  utter.rate=0.9;
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang="de-DE";
-  u.rate=0.9;
-  speechSynthesis.speak(u);
+  speechSynthesis.speak(utter);
 }
 
+/* === Correct / Wrong Sound (iPhone stabil) === */
 function playCorrect(){
-  if(!audioUnlocked) return;
-  const ctx=new (window.AudioContext||window.webkitAudioContext)();
-  const o=ctx.createOscillator();
-  const g=ctx.createGain();
-  o.type="triangle";
-  o.frequency.value=900;
-  g.gain.value=0.4;
-  o.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime+0.2);
+  const audio=new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
+  audio.play();
 }
 
 function playWrong(){
-  if(!audioUnlocked) return;
-  const ctx=new (window.AudioContext||window.webkitAudioContext)();
-  const o=ctx.createOscillator();
-  const g=ctx.createGain();
-  o.type="sawtooth";
-  o.frequency.value=200;
-  g.gain.value=0.4;
-  o.connect(g);
-  g.connect(ctx.destination);
-  o.start();
-  o.stop(ctx.currentTime+0.25);
+  const audio=new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
+  audio.play();
 }
 
+/* === Feedback + Animation === */
 window.onload=function(){
 
   const fb="{{feedback}}";
   const fbEl=document.getElementById("fb");
 
   if(fb==="correct"){
-    fbEl.innerText="Correct";
+    fbEl.innerText="Correct ✅";
     fbEl.className="feedback correct";
     playCorrect();
 
-    // skor animasyonu
     const scoreEl=document.getElementById("scoreValue");
     scoreEl.classList.add("bounce");
     setTimeout(()=>scoreEl.classList.remove("bounce"),400);
   }
 
   if(fb==="wrong"){
-    fbEl.innerText="Wrong";
+    fbEl.innerText="Wrong ❌";
     fbEl.className="feedback wrong";
     playWrong();
   }
-
-  setTimeout(()=>{
-    speak(document.getElementById("word").innerText);
-  },500);
-}
-
+};
 </script>
 
 </body>
