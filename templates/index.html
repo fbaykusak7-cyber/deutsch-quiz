@@ -24,6 +24,8 @@
     border-radius:18px;
     box-shadow:0 20px 50px rgba(0,0,0,0.30);
     text-align:center;
+    position:relative;
+    overflow:hidden;
   }
 
   @media(min-width:900px){
@@ -122,10 +124,37 @@
   .correct{ color:#16a34a; }
   .wrong{ color:#dc2626; }
 
-  .hint{
-    font-size:12px;
-    color:#667;
-    margin-top:6px;
+  /* iPhone ilk izin katmanı */
+  .soundgate{
+    position:absolute;
+    inset:0;
+    background:rgba(17,24,39,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+  .soundgate.show{ display:flex; }
+  .soundbox{
+    background:#fff;
+    border-radius:16px;
+    padding:18px;
+    max-width:520px;
+    width:100%;
+    text-align:center;
+  }
+  .soundbox h3{ margin:0 0 8px 0; }
+  .soundbox p{ margin:0 0 12px 0; color:#334; line-height:1.35; }
+  .enablebtn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#2a5298;
+    color:#fff;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
   }
 </style>
 </head>
@@ -152,7 +181,7 @@
 
   <div id="word">{{german}}</div>
 
-  <button class="listen" id="listenBtn">🔊 Listen (German)</button>
+  <button class="listen" id="listenBtn">Listen (German)</button>
 
   <div id="fb" class="feedback"></div>
 
@@ -162,88 +191,193 @@
     {% endfor %}
   </form>
 
-  <div class="hint">iPhone’da ses için önce “Listen” butonuna 1 kere bas.</div>
+  <!-- iPhone/Safari sound gate (1 kere aç, sonra otomatik) -->
+  <div id="soundGate" class="soundgate">
+    <div class="soundbox">
+      <h3>Enable Sound</h3>
+      <p>iPhone/Safari otomatik ses için ilk kez izin ister. Bir kere açınca bundan sonra telaffuz otomatik olacaktır.</p>
+      <button id="enableSoundBtn" class="enablebtn">Enable sound</button>
+    </div>
+  </div>
 
 </div>
 
 <script>
-  // --------- German TTS (reliable selection) ----------
-  let preferredGermanVoice = null;
+/* =========================
+   1) SOUND UNLOCK (iPhone)
+   ========================= */
 
-  function pickGermanVoice(){
-    const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-    preferredGermanVoice =
-      voices.find(v => (v.lang || "").toLowerCase().startsWith("de") && /google|enhanced|premium/i.test(v.name || "")) ||
-      voices.find(v => (v.lang || "").toLowerCase().startsWith("de")) ||
-      null;
+let soundEnabled = localStorage.getItem("soundEnabled") === "1";
+const soundGate = document.getElementById("soundGate");
+const enableSoundBtn = document.getElementById("enableSoundBtn");
+
+function unlockAudioContextOnce(){
+  // iOS için AudioContext başlat
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    g.gain.value = 0;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.01);
+  }catch(e){}
+}
+
+function enableSound(){
+  soundEnabled = true;
+  localStorage.setItem("soundEnabled","1");
+  soundGate.classList.remove("show");
+  unlockAudioContextOnce();
+  // Açınca hemen kelimeyi otomatik oku
+  autoSpeakCurrentWord();
+}
+
+if(!soundEnabled){
+  soundGate.classList.add("show");
+}
+
+enableSoundBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  enableSound();
+});
+
+/* =========================
+   2) BEST GERMAN VOICE PICK
+   ========================= */
+
+let bestGermanVoice = null;
+
+function pickBestGermanVoice(){
+  if(!('speechSynthesis' in window)) return;
+  const voices = speechSynthesis.getVoices();
+  if(!voices || !voices.length) return;
+
+  // "de" + en iyi isimleri öncele
+  bestGermanVoice =
+    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de") && /premium|enhanced|google|natural/i.test(v.name || "")) ||
+    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de") && /siri|anna|markus|helena/i.test(v.name || "")) ||
+    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de")) ||
+    null;
+}
+
+if('speechSynthesis' in window){
+  pickBestGermanVoice();
+  speechSynthesis.onvoiceschanged = pickBestGermanVoice;
+}
+
+/* =========================
+   3) GERMAN TTS (AUTO + BTN)
+   ========================= */
+
+function speakGerman(text){
+  if(!soundEnabled) return;
+  if(!('speechSynthesis' in window)) return;
+
+  pickBestGermanVoice(); // her seferinde şansını artır
+
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE";
+  u.rate = 0.9;
+  u.pitch = 1;
+  if(bestGermanVoice) u.voice = bestGermanVoice;
+  speechSynthesis.speak(u);
+}
+
+function autoSpeakCurrentWord(){
+  const text = document.getElementById("word").innerText;
+  // küçük gecikme iOS için daha stabil
+  setTimeout(()=>speakGerman(text), 250);
+}
+
+document.getElementById("listenBtn").addEventListener("click", function(){
+  if(!soundEnabled){
+    soundGate.classList.add("show");
+    return;
+  }
+  unlockAudioContextOnce();
+  autoSpeakCurrentWord();
+});
+
+/* =========================
+   4) CORRECT / WRONG SOUNDS
+   (WebAudio - modern)
+   ========================= */
+
+function playCorrect(){
+  if(!soundEnabled) return;
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "triangle";
+    o.frequency.setValueAtTime(880, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.12);
+    g.gain.setValueAtTime(0.001, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+    o.connect(g); g.connect(ctx.destination);
+    o.start();
+    o.stop(ctx.currentTime + 0.20);
+  }catch(e){}
+}
+
+function playWrong(){
+  if(!soundEnabled) return;
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "sawtooth";
+    o.frequency.setValueAtTime(220, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.18);
+    g.gain.setValueAtTime(0.001, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.24);
+    o.connect(g); g.connect(ctx.destination);
+    o.start();
+    o.stop(ctx.currentTime + 0.25);
+  }catch(e){}
+}
+
+/* =========================
+   5) FEEDBACK (NO EMOJI)
+   + ANIMATION
+   ========================= */
+
+window.addEventListener("load", () => {
+  // iOS voice list init
+  if('speechSynthesis' in window){
+    speechSynthesis.getVoices();
   }
 
-  if ('speechSynthesis' in window) {
-    pickGermanVoice();
-    speechSynthesis.onvoiceschanged = pickGermanVoice;
+  const fb = "{{feedback}}";
+  const fbEl = document.getElementById("fb");
+
+  if (fb === "correct") {
+    fbEl.textContent = "Correct";
+    fbEl.className = "feedback correct";
+    playCorrect();
+
+    const scoreEl = document.getElementById("scoreValue");
+    scoreEl.classList.add("bounce");
+    setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
+  } else if (fb === "wrong") {
+    fbEl.textContent = "Wrong";
+    fbEl.className = "feedback wrong";
+    playWrong();
+  } else {
+    fbEl.textContent = "";
   }
 
-  function speakGerman(text){
-    if (!('speechSynthesis' in window)) return;
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "de-DE";
-    u.rate = 0.9;
-    if (preferredGermanVoice) u.voice = preferredGermanVoice;
-    speechSynthesis.speak(u);
+  // Otomatik telaffuz (ses açık ise)
+  if(soundEnabled){
+    unlockAudioContextOnce();
+    autoSpeakCurrentWord();
   }
-
-  // --------- Sound enable + Correct/Wrong sounds ----------
-  // iPhone autoplay kısıtı var. Kullanıcı 1 kere Listen'a basınca sesler garanti.
-  let soundEnabled = localStorage.getItem("soundEnabled") === "1";
-
-  function enableSound(){
-    soundEnabled = true;
-    localStorage.setItem("soundEnabled","1");
-  }
-
-  function playCorrect(){
-    if(!soundEnabled) return;
-    const a = new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
-    a.play().catch(()=>{});
-  }
-
-  function playWrong(){
-    if(!soundEnabled) return;
-    const a = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
-    a.play().catch(()=>{});
-  }
-
-  // Listen button
-  document.getElementById("listenBtn").addEventListener("click", () => {
-    enableSound();
-    speakGerman(document.getElementById("word").innerText);
-  });
-
-  // --------- Feedback + animation ----------
-  window.addEventListener("load", () => {
-    // voices init (iOS)
-    if ('speechSynthesis' in window) { speechSynthesis.getVoices(); }
-
-    const fb = "{{feedback}}";
-    const fbEl = document.getElementById("fb");
-
-    if (fb === "correct") {
-      fbEl.textContent = "Correct ✅";
-      fbEl.className = "feedback correct";
-      playCorrect();
-
-      const scoreEl = document.getElementById("scoreValue");
-      scoreEl.classList.add("bounce");
-      setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
-    } else if (fb === "wrong") {
-      fbEl.textContent = "Wrong ❌";
-      fbEl.className = "feedback wrong";
-      playWrong();
-    } else {
-      fbEl.textContent = "";
-    }
-  });
+});
 </script>
+
 </body>
 </html>
