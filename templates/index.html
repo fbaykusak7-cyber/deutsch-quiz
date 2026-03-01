@@ -6,146 +6,244 @@
 <title>Deutsch Quiz</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#1e3c72,#2a5298);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-}
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
 
-.card{
-  background:white;
-  width:95%;
-  max-width:700px;
-  padding:25px;
-  border-radius:15px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
-}
+  .card{
+    background:#fff;
+    width:95%;
+    max-width:900px;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.30);
+    text-align:center;
+  }
 
-@media(min-width:900px){
-  .card{padding:40px;}
-  h2{font-size:36px;}
-}
+  @media(min-width:900px){
+    .card{ padding:40px; }
+    #word{ font-size:40px; }
+  }
 
-button{
-  width:100%;
-  padding:14px;
-  margin-top:8px;
-  border:none;
-  border-radius:8px;
-  background:#2a5298;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
+  @media(max-width:450px){
+    #word{ font-size:26px; }
+    .cat{ font-size:13px; padding:6px 10px; }
+  }
 
-button:active{
-  transform:scale(0.97);
-}
+  .catbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:14px;
+  }
 
-.feedback{
-  margin:10px 0;
-  font-weight:bold;
-  font-size:20px;
-  height:28px;
-}
+  .cat{
+    display:inline-block;
+    text-decoration:none;
+    padding:7px 12px;
+    border-radius:10px;
+    background:#eef2ff;
+    color:#1f2a44;
+    font-weight:700;
+    border:1px solid #d8def0;
+  }
 
-.correct{ color:#1db954; }
-.wrong{ color:#e63946; }
+  .cat.active{
+    background:#2a5298;
+    color:#fff;
+    border-color:#2a5298;
+  }
 
-.score{
-  display:inline-block;
-  transition:0.3s;
-  font-weight:bold;
-}
+  .stats{
+    font-size:14px;
+    color:#334;
+    margin-bottom:10px;
+  }
 
-.bounce{
-  animation:bounce 0.4s;
-}
+  .score{
+    display:inline-block;
+    font-weight:800;
+  }
 
-@keyframes bounce{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.4);}
-  100%{transform:scale(1);}
-}
+  .bounce{
+    animation:bounce 0.35s;
+  }
+
+  @keyframes bounce{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.45);}
+    100%{transform:scale(1);}
+  }
+
+  #word{
+    margin:14px 0 10px 0;
+    font-size:32px;
+    font-weight:900;
+  }
+
+  .listen{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:10px;
+  }
+
+  .answer{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    background:#2a5298;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .answer:active{ transform:scale(0.98); }
+
+  .feedback{
+    height:26px;
+    font-weight:900;
+    font-size:18px;
+    margin:8px 0 2px 0;
+  }
+  .correct{ color:#16a34a; }
+  .wrong{ color:#dc2626; }
+
+  .hint{
+    font-size:12px;
+    color:#667;
+    margin-top:6px;
+  }
 </style>
 </head>
 
 <body>
-
 <div class="card">
 
-<div>
-Score: <span id="scoreValue" class="score">{{score}}</span> / {{total}}
-</div>
+  <div class="catbar">
+    <a class="cat {% if selected_level=='a1' %}active{% endif %}" href="/set/a1">A1</a>
+    <a class="cat {% if selected_level=='a2' %}active{% endif %}" href="/set/a2">A2</a>
+    <a class="cat {% if selected_level=='hotel' %}active{% endif %}" href="/set/hotel">Hotel</a>
+    <a class="cat {% if selected_level=='verb' %}active{% endif %}" href="/set/verb">Verb</a>
+    <a class="cat {% if selected_level=='pronouns' %}active{% endif %}" href="/set/pronouns">Pronouns</a>
+    <a class="cat {% if selected_level=='mixed' %}active{% endif %}" href="/set/mixed">Mixed</a>
+    <a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong ({{wrong_count}})</a>
+  </div>
 
-<h2 id="word">{{german}}</h2>
+  <div class="stats">
+    Category: {{selected_level.upper()}} |
+    Level {{level_number}} |
+    XP {{xp}} |
+    Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
+  </div>
 
-<button onclick="speakWord()">🔊 Listen</button>
+  <div id="word">{{german}}</div>
 
-<div id="fb" class="feedback"></div>
+  <button class="listen" id="listenBtn">🔊 Listen (German)</button>
 
-<form method="post">
-{% for o in options %}
-<button type="submit" name="answer" value="{{o}}">{{o}}</button>
-{% endfor %}
-</form>
+  <div id="fb" class="feedback"></div>
+
+  <form method="post" id="quizForm">
+    {% for o in options %}
+      <button class="answer" type="submit" name="answer" value="{{o}}">{{o}}</button>
+    {% endfor %}
+  </form>
+
+  <div class="hint">iPhone’da ses için önce “Listen” butonuna 1 kere bas.</div>
 
 </div>
 
 <script>
+  // --------- German TTS (reliable selection) ----------
+  let preferredGermanVoice = null;
 
-/* === Listen (TTS) === */
-function speakWord(){
-  const text=document.getElementById("word").innerText;
-
-  if(!('speechSynthesis' in window)) return;
-
-  const utter=new SpeechSynthesisUtterance(text);
-  utter.lang="de-DE";
-  utter.rate=0.9;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
-}
-
-/* === Correct / Wrong Sound (iPhone stabil) === */
-function playCorrect(){
-  const audio=new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
-  audio.play();
-}
-
-function playWrong(){
-  const audio=new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
-  audio.play();
-}
-
-/* === Feedback + Animation === */
-window.onload=function(){
-
-  const fb="{{feedback}}";
-  const fbEl=document.getElementById("fb");
-
-  if(fb==="correct"){
-    fbEl.innerText="Correct ✅";
-    fbEl.className="feedback correct";
-    playCorrect();
-
-    const scoreEl=document.getElementById("scoreValue");
-    scoreEl.classList.add("bounce");
-    setTimeout(()=>scoreEl.classList.remove("bounce"),400);
+  function pickGermanVoice(){
+    const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    preferredGermanVoice =
+      voices.find(v => (v.lang || "").toLowerCase().startsWith("de") && /google|enhanced|premium/i.test(v.name || "")) ||
+      voices.find(v => (v.lang || "").toLowerCase().startsWith("de")) ||
+      null;
   }
 
-  if(fb==="wrong"){
-    fbEl.innerText="Wrong ❌";
-    fbEl.className="feedback wrong";
-    playWrong();
+  if ('speechSynthesis' in window) {
+    pickGermanVoice();
+    speechSynthesis.onvoiceschanged = pickGermanVoice;
   }
-};
+
+  function speakGerman(text){
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    u.rate = 0.9;
+    if (preferredGermanVoice) u.voice = preferredGermanVoice;
+    speechSynthesis.speak(u);
+  }
+
+  // --------- Sound enable + Correct/Wrong sounds ----------
+  // iPhone autoplay kısıtı var. Kullanıcı 1 kere Listen'a basınca sesler garanti.
+  let soundEnabled = localStorage.getItem("soundEnabled") === "1";
+
+  function enableSound(){
+    soundEnabled = true;
+    localStorage.setItem("soundEnabled","1");
+  }
+
+  function playCorrect(){
+    if(!soundEnabled) return;
+    const a = new Audio("https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg");
+    a.play().catch(()=>{});
+  }
+
+  function playWrong(){
+    if(!soundEnabled) return;
+    const a = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
+    a.play().catch(()=>{});
+  }
+
+  // Listen button
+  document.getElementById("listenBtn").addEventListener("click", () => {
+    enableSound();
+    speakGerman(document.getElementById("word").innerText);
+  });
+
+  // --------- Feedback + animation ----------
+  window.addEventListener("load", () => {
+    // voices init (iOS)
+    if ('speechSynthesis' in window) { speechSynthesis.getVoices(); }
+
+    const fb = "{{feedback}}";
+    const fbEl = document.getElementById("fb");
+
+    if (fb === "correct") {
+      fbEl.textContent = "Correct ✅";
+      fbEl.className = "feedback correct";
+      playCorrect();
+
+      const scoreEl = document.getElementById("scoreValue");
+      scoreEl.classList.add("bounce");
+      setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
+    } else if (fb === "wrong") {
+      fbEl.textContent = "Wrong ❌";
+      fbEl.className = "feedback wrong";
+      playWrong();
+    } else {
+      fbEl.textContent = "";
+    }
+  });
 </script>
-
 </body>
 </html>
