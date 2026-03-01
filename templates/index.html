@@ -24,18 +24,6 @@
     border-radius:18px;
     box-shadow:0 20px 50px rgba(0,0,0,0.30);
     text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-
-  @media(min-width:900px){
-    .card{ padding:40px; }
-    #word{ font-size:40px; }
-  }
-
-  @media(max-width:450px){
-    #word{ font-size:26px; }
-    .cat{ font-size:13px; padding:6px 10px; }
   }
 
   .catbar{
@@ -47,25 +35,21 @@
   }
 
   .cat{
-    display:inline-block;
     text-decoration:none;
     padding:7px 12px;
     border-radius:10px;
     background:#eef2ff;
     color:#1f2a44;
     font-weight:700;
-    border:1px solid #d8def0;
   }
 
   .cat.active{
     background:#2a5298;
     color:#fff;
-    border-color:#2a5298;
   }
 
   .stats{
     font-size:14px;
-    color:#334;
     margin-bottom:10px;
   }
 
@@ -80,13 +64,13 @@
 
   @keyframes bounce{
     0%{transform:scale(1);}
-    50%{transform:scale(1.45);}
+    50%{transform:scale(1.4);}
     100%{transform:scale(1);}
   }
 
   #word{
-    margin:14px 0 10px 0;
-    font-size:32px;
+    margin:14px 0;
+    font-size:30px;
     font-weight:900;
   }
 
@@ -113,270 +97,199 @@
     font-size:16px;
     cursor:pointer;
   }
-  .answer:active{ transform:scale(0.98); }
 
   .feedback{
     height:26px;
     font-weight:900;
     font-size:18px;
-    margin:8px 0 2px 0;
+    margin:8px 0;
   }
+
   .correct{ color:#16a34a; }
   .wrong{ color:#dc2626; }
 
-  /* iPhone ilk izin katmanı */
-  .soundgate{
-    position:absolute;
+  .overlay{
+    position:fixed;
     inset:0;
-    background:rgba(17,24,39,0.92);
-    display:none;
-    align-items:center;
+    background:rgba(0,0,0,0.85);
+    display:flex;
     justify-content:center;
-    padding:18px;
+    align-items:center;
+    z-index:9999;
   }
-  .soundgate.show{ display:flex; }
-  .soundbox{
-    background:#fff;
-    border-radius:16px;
-    padding:18px;
-    max-width:520px;
-    width:100%;
+
+  .overlay-box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
     text-align:center;
   }
-  .soundbox h3{ margin:0 0 8px 0; }
-  .soundbox p{ margin:0 0 12px 0; color:#334; line-height:1.35; }
-  .enablebtn{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#2a5298;
-    color:#fff;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-  }
+
 </style>
 </head>
 
 <body>
+
 <div class="card">
 
-  <div class="catbar">
-    <a class="cat {% if selected_level=='a1' %}active{% endif %}" href="/set/a1">A1</a>
-    <a class="cat {% if selected_level=='a2' %}active{% endif %}" href="/set/a2">A2</a>
-    <a class="cat {% if selected_level=='hotel' %}active{% endif %}" href="/set/hotel">Hotel</a>
-    <a class="cat {% if selected_level=='verb' %}active{% endif %}" href="/set/verb">Verb</a>
-    <a class="cat {% if selected_level=='pronouns' %}active{% endif %}" href="/set/pronouns">Pronouns</a>
-    <a class="cat {% if selected_level=='mixed' %}active{% endif %}" href="/set/mixed">Mixed</a>
-    <a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong ({{wrong_count}})</a>
-  </div>
+<div class="catbar">
+<a class="cat {% if selected_level=='a1' %}active{% endif %}" href="/set/a1">A1</a>
+<a class="cat {% if selected_level=='a2' %}active{% endif %}" href="/set/a2">A2</a>
+<a class="cat {% if selected_level=='hotel' %}active{% endif %}" href="/set/hotel">Hotel</a>
+<a class="cat {% if selected_level=='verb' %}active{% endif %}" href="/set/verb">Verb</a>
+<a class="cat {% if selected_level=='pronouns' %}active{% endif %}" href="/set/pronouns">Pronouns</a>
+<a class="cat {% if selected_level=='mixed' %}active{% endif %}" href="/set/mixed">Mixed</a>
+<a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong ({{wrong_count}})</a>
+</div>
 
-  <div class="stats">
-    Category: {{selected_level.upper()}} |
-    Level {{level_number}} |
-    XP {{xp}} |
-    Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
-  </div>
+<div class="stats">
+Category: {{selected_level.upper()}} |
+Level {{level_number}} |
+XP {{xp}} |
+Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
+</div>
 
-  <div id="word">{{german}}</div>
+<div id="word">{{german}}</div>
 
-  <button class="listen" id="listenBtn">Listen (German)</button>
+<button class="listen" id="listenBtn">Listen (German)</button>
 
-  <div id="fb" class="feedback"></div>
+<div id="fb" class="feedback"></div>
 
-  <form method="post" id="quizForm">
-    {% for o in options %}
-      <button class="answer" type="submit" name="answer" value="{{o}}">{{o}}</button>
-    {% endfor %}
-  </form>
-
-  <!-- iPhone/Safari sound gate (1 kere aç, sonra otomatik) -->
-  <div id="soundGate" class="soundgate">
-    <div class="soundbox">
-      <h3>Enable Sound</h3>
-      <p>iPhone/Safari otomatik ses için ilk kez izin ister. Bir kere açınca bundan sonra telaffuz otomatik olacaktır.</p>
-      <button id="enableSoundBtn" class="enablebtn">Enable sound</button>
-    </div>
-  </div>
+<form method="post">
+{% for o in options %}
+<button class="answer" type="submit" name="answer" value="{{o}}">{{o}}</button>
+{% endfor %}
+</form>
 
 </div>
 
+<!-- SOUND ENABLE OVERLAY -->
+<div id="soundOverlay" class="overlay" style="display:none;">
+  <div class="overlay-box">
+    <h3>Enable Sound</h3>
+    <p>Tap once to activate sound</p>
+    <button onclick="enableSound()">Enable</button>
+  </div>
+</div>
+
 <script>
-/* =========================
-   1) SOUND UNLOCK (iPhone)
-   ========================= */
 
 let soundEnabled = localStorage.getItem("soundEnabled") === "1";
-const soundGate = document.getElementById("soundGate");
-const enableSoundBtn = document.getElementById("enableSoundBtn");
+let bestVoice = null;
 
-function unlockAudioContextOnce(){
-  // iOS için AudioContext başlat
-  try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    ctx.resume();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    g.gain.value = 0;
-    o.connect(g); g.connect(ctx.destination);
-    o.start(); o.stop(ctx.currentTime + 0.01);
-  }catch(e){}
-}
-
-function enableSound(){
-  soundEnabled = true;
-  localStorage.setItem("soundEnabled","1");
-  soundGate.classList.remove("show");
-  unlockAudioContextOnce();
-  // Açınca hemen kelimeyi otomatik oku
-  autoSpeakCurrentWord();
-}
-
+/* Show overlay if needed */
 if(!soundEnabled){
-  soundGate.classList.add("show");
+  document.getElementById("soundOverlay").style.display="flex";
 }
 
-enableSoundBtn.addEventListener("click", function(e){
-  e.preventDefault();
-  enableSound();
-});
+/* Enable sound */
+function enableSound(){
+  localStorage.setItem("soundEnabled","1");
+  soundEnabled=true;
+  document.getElementById("soundOverlay").style.display="none";
 
-/* =========================
-   2) BEST GERMAN VOICE PICK
-   ========================= */
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  ctx.resume();
 
-let bestGermanVoice = null;
+  autoSpeak();
+}
 
-function pickBestGermanVoice(){
-  if(!('speechSynthesis' in window)) return;
+/* Pick best German voice */
+function pickVoice(){
   const voices = speechSynthesis.getVoices();
-  if(!voices || !voices.length) return;
-
-  // "de" + en iyi isimleri öncele
-  bestGermanVoice =
-    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de") && /premium|enhanced|google|natural/i.test(v.name || "")) ||
-    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de") && /siri|anna|markus|helena/i.test(v.name || "")) ||
-    voices.find(v => v.lang && v.lang.toLowerCase().startsWith("de")) ||
+  bestVoice =
+    voices.find(v => v.lang && v.lang.startsWith("de") && /premium|enhanced|google|natural/i.test(v.name))
+    ||
+    voices.find(v => v.lang && v.lang.startsWith("de"))
+    ||
     null;
 }
 
 if('speechSynthesis' in window){
-  pickBestGermanVoice();
-  speechSynthesis.onvoiceschanged = pickBestGermanVoice;
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
 }
 
-/* =========================
-   3) GERMAN TTS (AUTO + BTN)
-   ========================= */
-
+/* Speak German */
 function speakGerman(text){
   if(!soundEnabled) return;
-  if(!('speechSynthesis' in window)) return;
-
-  pickBestGermanVoice(); // her seferinde şansını artır
 
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "de-DE";
-  u.rate = 0.9;
-  u.pitch = 1;
-  if(bestGermanVoice) u.voice = bestGermanVoice;
+  u.lang="de-DE";
+  u.rate=0.9;
+  if(bestVoice) u.voice=bestVoice;
   speechSynthesis.speak(u);
 }
 
-function autoSpeakCurrentWord(){
-  const text = document.getElementById("word").innerText;
-  // küçük gecikme iOS için daha stabil
-  setTimeout(()=>speakGerman(text), 250);
+function autoSpeak(){
+  setTimeout(()=>speakGerman(document.getElementById("word").innerText),300);
 }
 
-document.getElementById("listenBtn").addEventListener("click", function(){
-  if(!soundEnabled){
-    soundGate.classList.add("show");
-    return;
-  }
-  unlockAudioContextOnce();
-  autoSpeakCurrentWord();
-});
-
-/* =========================
-   4) CORRECT / WRONG SOUNDS
-   (WebAudio - modern)
-   ========================= */
-
+/* Correct / Wrong sounds */
 function playCorrect(){
   if(!soundEnabled) return;
-  try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "triangle";
-    o.frequency.setValueAtTime(880, ctx.currentTime);
-    o.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.12);
-    g.gain.setValueAtTime(0.001, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
-    o.connect(g); g.connect(ctx.destination);
-    o.start();
-    o.stop(ctx.currentTime + 0.20);
-  }catch(e){}
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type="triangle";
+  o.frequency.value=1000;
+  g.gain.setValueAtTime(0.001,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4,ctx.currentTime+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.25);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime+0.25);
 }
 
 function playWrong(){
   if(!soundEnabled) return;
-  try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "sawtooth";
-    o.frequency.setValueAtTime(220, ctx.currentTime);
-    o.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.18);
-    g.gain.setValueAtTime(0.001, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.24);
-    o.connect(g); g.connect(ctx.destination);
-    o.start();
-    o.stop(ctx.currentTime + 0.25);
-  }catch(e){}
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type="sawtooth";
+  o.frequency.value=180;
+  g.gain.setValueAtTime(0.001,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4,ctx.currentTime+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.3);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime+0.3);
 }
 
-/* =========================
-   5) FEEDBACK (NO EMOJI)
-   + ANIMATION
-   ========================= */
+/* Feedback handler */
+window.addEventListener("load", function(){
 
-window.addEventListener("load", () => {
-  // iOS voice list init
-  if('speechSynthesis' in window){
-    speechSynthesis.getVoices();
+  if(soundEnabled){
+    autoSpeak();
   }
 
-  const fb = "{{feedback}}";
-  const fbEl = document.getElementById("fb");
+  const fb="{{feedback}}";
+  const fbEl=document.getElementById("fb");
 
-  if (fb === "correct") {
-    fbEl.textContent = "Correct";
-    fbEl.className = "feedback correct";
+  if(fb==="correct"){
+    fbEl.textContent="Correct";
+    fbEl.className="feedback correct";
     playCorrect();
 
-    const scoreEl = document.getElementById("scoreValue");
+    const scoreEl=document.getElementById("scoreValue");
     scoreEl.classList.add("bounce");
-    setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
-  } else if (fb === "wrong") {
-    fbEl.textContent = "Wrong";
-    fbEl.className = "feedback wrong";
-    playWrong();
-  } else {
-    fbEl.textContent = "";
+    setTimeout(()=>scoreEl.classList.remove("bounce"),400);
   }
 
-  // Otomatik telaffuz (ses açık ise)
+  if(fb==="wrong"){
+    fbEl.textContent="Wrong";
+    fbEl.className="feedback wrong";
+    playWrong();
+  }
+
+});
+
+/* Listen button */
+document.getElementById("listenBtn").addEventListener("click", function(){
   if(soundEnabled){
-    unlockAudioContextOnce();
-    autoSpeakCurrentWord();
+    autoSpeak();
   }
 });
+
 </script>
 
 </body>
