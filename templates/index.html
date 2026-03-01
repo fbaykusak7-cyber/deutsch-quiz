@@ -2,30 +2,145 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Quiz</title>
+
 <style>
+
+/* ===== GENEL ===== */
+
 body{
-  margin:0;font-family:Arial;
+  margin:0;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background:linear-gradient(135deg,#1e3c72,#2a5298);
-  display:flex;justify-content:center;align-items:center;height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
+
 .card{
-  background:white;padding:26px;border-radius:15px;width:580px;
-  text-align:center;box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  background:white;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  transition:0.3s;
 }
-.catbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;}
+
+/* ===== MASAÜSTÜ ===== */
+
+@media (min-width: 900px){
+
+  .card{
+    width:800px;
+    padding:40px;
+  }
+
+  h2{
+    font-size:38px;
+  }
+
+  button.answer{
+    font-size:18px;
+    padding:16px;
+  }
+
+}
+
+/* ===== TABLET ===== */
+
+@media (min-width: 600px) and (max-width: 899px){
+
+  .card{
+    width:600px;
+    padding:30px;
+  }
+
+  h2{
+    font-size:30px;
+  }
+
+}
+
+/* ===== MOBİL ===== */
+
+@media (max-width: 599px){
+
+  .card{
+    width:95%;
+    padding:20px;
+  }
+
+  h2{
+    font-size:24px;
+  }
+
+  button.answer{
+    font-size:15px;
+    padding:14px;
+  }
+
+}
+
+/* ===== ORTAK STİL ===== */
+
+.catbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-bottom:20px;
+}
+
 .cat{
-  padding:7px 10px;border-radius:8px;text-decoration:none;
-  background:#eef2ff;color:#1f2a44;font-weight:600;
+  padding:7px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  background:#eef2ff;
+  color:#1f2a44;
+  font-weight:600;
+  font-size:14px;
 }
-.cat.active{background:#2a5298;color:white;}
+
+.cat.active{
+  background:#2a5298;
+  color:white;
+}
+
+.stats{
+  font-size:14px;
+  margin-bottom:15px;
+  color:#444;
+}
+
 button.answer{
-  width:100%;padding:12px;margin-top:8px;border:none;border-radius:8px;
-  background:#2a5298;color:white;cursor:pointer;font-size:15px;
+  width:100%;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#2a5298;
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
 }
-.feedback{height:22px;margin:8px 0;font-weight:700;}
+
+button.answer:hover{
+  background:#1e3c72;
+}
+
+button.answer:active{
+  transform:scale(0.97);
+}
+
+.feedback{
+  height:25px;
+  margin:10px 0;
+  font-weight:bold;
+  font-size:16px;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -40,7 +155,7 @@ button.answer{
 <a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong</a>
 </div>
 
-<div>
+<div class="stats">
 Category: {{selected_level.upper()}} |
 Level {{level_number}} |
 XP {{xp}} |
@@ -59,56 +174,57 @@ Score {{score}} / {{total}}
 </div>
 
 <script>
+
+// 🔊 MOBİL + DESKTOP SES
+
 function speak(text){
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "de-DE";
-  u.rate = 0.9;
-  u.pitch = 1;
+  u.lang="de-DE";
+  u.rate=0.9;
   speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }
 
 function playCorrect(){
-  const ctx = new AudioContext();
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
   const o = ctx.createOscillator();
   const g = ctx.createGain();
   o.type="triangle";
-  o.frequency.setValueAtTime(900, ctx.currentTime);
-  o.frequency.exponentialRampToValueAtTime(1300, ctx.currentTime+0.2);
-  g.gain.setValueAtTime(0.001, ctx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.05);
-  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.25);
+  o.frequency.value=950;
+  g.gain.value=0.35;
   o.connect(g); g.connect(ctx.destination);
-  o.start(); o.stop(ctx.currentTime+0.25);
+  o.start();
+  o.stop(ctx.currentTime+0.18);
 }
 
 function playWrong(){
-  const ctx = new AudioContext();
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
   const o = ctx.createOscillator();
   const g = ctx.createGain();
   o.type="sawtooth";
-  o.frequency.setValueAtTime(220, ctx.currentTime);
-  o.frequency.exponentialRampToValueAtTime(120, ctx.currentTime+0.3);
-  g.gain.setValueAtTime(0.001, ctx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.05);
-  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.35);
+  o.frequency.value=200;
+  g.gain.value=0.35;
   o.connect(g); g.connect(ctx.destination);
-  o.start(); o.stop(ctx.currentTime+0.35);
+  o.start();
+  o.stop(ctx.currentTime+0.25);
 }
 
 window.onload=function(){
-  speak(document.getElementById("word").innerText);
+  setTimeout(()=>speak(document.getElementById("word").innerText),400);
 
   const fb="{{feedback}}";
+
   if(fb==="correct"){
     document.getElementById("fb").innerText="Correct ✅";
     playCorrect();
   }
+
   if(fb==="wrong"){
     document.getElementById("fb").innerText="Wrong ❌";
     playWrong();
   }
 }
+
 </script>
 
 </body>
