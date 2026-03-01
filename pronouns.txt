@@ -1,0 +1,86 @@
+
+du — you (informal singular)
+er — he
+sie — she
+es — it
+wir — we
+ihr — you (plural informal)
+sie — they
+Sie — you (formal)
+
+mich — me
+dich — you (acc.)
+ihn — him
+sie — her
+es — it
+uns — us
+euch — you (plural acc.)
+sie — them
+Sie — you (formal acc.)
+
+mir — to me
+dir — to you
+ihm — to him
+ihr — to her
+ihm — to it
+uns — to us
+euch — to you (plural dat.)
+ihnen — to them
+Ihnen — to you (formal dat.)
+
+mein — my
+dein — your
+sein — his
+ihr — her
+sein — its
+unser — our
+euer — your (plural)
+ihr — their
+Ihr — your (formal)
+
+mich — myself
+dich — yourself
+sich — himself / herself / itself / themselves
+uns — ourselves
+euch — yourselves
+
+dieser — this (masc.)
+diese — this (fem./plural)
+dieses — this (neut.)
+jener — that (masc.)
+jene — that (fem./plural)
+jenes — that (neut.)
+
+der — that one / who
+die — that one / who
+das — that one / which
+dessen — whose (masc./neut.)
+deren — whose (fem./plural)
+dem — to whom
+den — whom (acc.)
+
+wer — who
+wen — whom
+wem — to whom
+wessen — whose
+was — what
+welcher — which (masc.)
+welche — which (fem./plural)
+welches — which (neut.)
+
+man — one / people
+jemand — someone
+niemand — nobody
+etwas — something
+nichts — nothing
+alles — everything
+jeder — everyone (masc.)
+jede — everyone (fem.)
+jedes — everyone (neut.)
+einige — some
+viele — many
+wenige — few
+mehrere — several
+beide — both
+andere — other
+einander — each other

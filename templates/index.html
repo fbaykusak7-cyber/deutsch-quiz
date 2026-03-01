@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Deutsch Quiz</title>
+<style>
+body{
+  margin:0;font-family:Arial;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  display:flex;justify-content:center;align-items:center;height:100vh;
+}
+.card{
+  background:white;padding:26px;border-radius:15px;width:580px;
+  text-align:center;box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+.catbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;}
+.cat{
+  padding:7px 10px;border-radius:8px;text-decoration:none;
+  background:#eef2ff;color:#1f2a44;font-weight:600;
+}
+.cat.active{background:#2a5298;color:white;}
+button.answer{
+  width:100%;padding:12px;margin-top:8px;border:none;border-radius:8px;
+  background:#2a5298;color:white;cursor:pointer;font-size:15px;
+}
+.feedback{height:22px;margin:8px 0;font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div class="catbar">
+<a class="cat {% if selected_level=='a1' %}active{% endif %}" href="/set/a1">A1</a>
+<a class="cat {% if selected_level=='a2' %}active{% endif %}" href="/set/a2">A2</a>
+<a class="cat {% if selected_level=='hotel' %}active{% endif %}" href="/set/hotel">Hotel</a>
+<a class="cat {% if selected_level=='verb' %}active{% endif %}" href="/set/verb">Verb</a>
+<a class="cat {% if selected_level=='pronouns' %}active{% endif %}" href="/set/pronouns">Pronouns</a>
+<a class="cat {% if selected_level=='mixed' %}active{% endif %}" href="/set/mixed">Mixed</a>
+<a class="cat {% if selected_level=='wrong' %}active{% endif %}" href="/set/wrong">Wrong</a>
+</div>
+
+<div>
+Category: {{selected_level.upper()}} |
+Level {{level_number}} |
+XP {{xp}} |
+Score {{score}} / {{total}}
+</div>
+
+<h2 id="word">{{german}}</h2>
+<div id="fb" class="feedback"></div>
+
+<form method="post">
+{% for o in options %}
+<button class="answer" type="submit" name="answer" value="{{o}}">{{o}}</button>
+{% endfor %}
+</form>
+
+</div>
+
+<script>
+function speak(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE";
+  u.rate = 0.9;
+  u.pitch = 1;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+function playCorrect(){
+  const ctx = new AudioContext();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type="triangle";
+  o.frequency.setValueAtTime(900, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(1300, ctx.currentTime+0.2);
+  g.gain.setValueAtTime(0.001, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.05);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.25);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime+0.25);
+}
+
+function playWrong(){
+  const ctx = new AudioContext();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.type="sawtooth";
+  o.frequency.setValueAtTime(220, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(120, ctx.currentTime+0.3);
+  g.gain.setValueAtTime(0.001, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4, ctx.currentTime+0.05);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.35);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime+0.35);
+}
+
+window.onload=function(){
+  speak(document.getElementById("word").innerText);
+
+  const fb="{{feedback}}";
+  if(fb==="correct"){
+    document.getElementById("fb").innerText="Correct ✅";
+    playCorrect();
+  }
+  if(fb==="wrong"){
+    document.getElementById("fb").innerText="Wrong ❌";
+    playWrong();
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+sein — be
+
+haben — have
+
+werden — become
+
+können — can
+
+müssen — must
+
+wollen — want
+
+sollen — should
+
+dürfen — may
+
+mögen — like
+
+machen — do/make
+
+gehen — go
+
+kommen — come
+
+sehen — see
+
+hören — hear
+
+sprechen — speak
+
+sagen — say
+
+fragen — ask
+
+antworten — answer
+
+geben — give
+
+nehmen — take
+
+finden — find
+
+bleiben — stay
+
+wohnen — live
+
+arbeiten — work
+
+lernen — learn
+
+spielen — play
+
+essen — eat
+
+trinken — drink
+
+schlafen — sleep
+
+kaufen — buy
+
+verkaufen — sell
+
+lesen — read
+
+schreiben — write
+
+fahren — drive
+
+laufen — run
+
+helfen — help
+
+lieben — love
+
+heißen — be called
+
+brauchen — need
+
+zahlen — pay
+
+der Mann — man
+
+die Frau — woman
+
+das Kind — child
+
+der Vater — father
+
+die Mutter — mother
+
+der Bruder — brother
+
+die Schwester — sister
+
+der Freund — friend
+
+die Freundin — girlfriend
+
+die Familie — family
+
+das Haus — house
+
+die Wohnung — apartment
+
+die Stadt — city
+
+das Land — country
+
+die Schule — school
+
+die Arbeit — work
+
+das Zimmer — room
+
+die Tür — door
+
+das Fenster — window
+
+der Tisch — table
+
+der Stuhl — chair
+
+das Bett — bed
+
+die Straße — street
+
+das Auto — car
+
+der Bus — bus
+
+der Zug — train
+
+das Fahrrad — bicycle
+
+der Bahnhof — station
+
+der Flughafen — airport
+
+der Markt — market
+
+das Geschäft — shop
+
+das Geld — money
+
+der Preis — price
+
+das Essen — food
+
+das Wasser — water
+
+der Kaffee — coffee
+
+der Tee — tea
+
+das Brot — bread
+
+der Käse — cheese
+
+der Apfel — apple
+
+die Banane — banana
+
+das Obst — fruit
+
+das Gemüse — vegetables
+
+das Fleisch — meat
+
+der Tag — day
+
+die Nacht — night
+
+der Morgen — morning
+
+der Abend — evening
+
+die Woche — week
+
+der Monat — month
+
+das Jahr — year
+
+die Zeit — time
+
+die Uhr — clock
+
+heute — today
+
+morgen — tomorrow
+
+gestern — yesterday
+
+jetzt — now
+
+später — later
+
+früh — early
+
+spät — late
+
+klein — small
+
+groß — big
+
+gut — good
+
+schlecht — bad
+
+neu — new
+
+alt — old
+
+jung — young
+
+schön — beautiful
+
+hässlich — ugly
+
+schnell — fast
+
+langsam — slow
+
+warm — warm
+
+kalt — cold
+
+heiß — hot
+
+teuer — expensive
+
+billig — cheap
+
+viel — much
+
+wenig — little
+
+immer — always
+
+nie — never
+
+oft — often
+
+manchmal — sometimes
+
+hier — here
+
+dort — there
+
+warum — why
+
+weil — because
+
+aber — but
+
+und — and
+
+oder — or
+
+wenn — if
+
+dass — that
+
+mit — with
+
+ohne — without
+
+für — for
+
+gegen — against
+
+über — over
+
+unter — under
+
+neben — next to
+
+vor — before
+
+nach — after
+
+zwischen — between
+
+im — in the
+
+am — at the
+
+zum — to the
+
+beim — at the
+
+vom — from the
+
+ins — into the
+
+aufs — onto the
+
+der Arzt — doctor
+
+das Krankenhaus — hospital
+
+die Polizei — police
+
+der Lehrer — teacher
+
+der Student — student
+
+der Kunde — customer
+
+der Chef — boss
+
+der Kollege — colleague
+
+die Frage — question
+
+die Antwort — answer
+
+lachen — laugh
+
+weinen — cry
+
+tanzen — dance
+
+singen — sing
+
+kochen — cook
+
+putzen — clean
+
+reparieren — repair
+
+planen — plan
+
+entscheiden — decide
+
+versuchen — try
+
+beginnen — begin
+
+enden — end
+
+warten — wait
+
+suchen — search
+
+zeigen — show
+
+denken — think
+
+glauben — believe
+
+hoffen — hope
+
+gewinnen — win
+
+verlieren — lose
+
+treffen — meet
+
+bringen — bring
+
+schicken — send
+
+rufen — call
+
+besuchen — visit
+
+erklären — explain
+
+verstehen — understand
+
+bestellen — order
+
+der Computer — computer
+
+das Handy — mobile phone
+
+das Internet — internet
+
+die Musik — music
+
+der Film — movie
+
+das Buch — book
+
+die Zeitung — newspaper
+
+das Bild — picture
+
+das Spiel — game
+
+der Sport — sport
+
+glücklich — happy
+
+traurig — sad
+
+müde — tired
+
+krank — sick
+
+gesund — healthy
+
+freundlich — friendly
+
+nett — nice
+
+wichtig — important
+
+richtig — correct
+
+falsch — wrong
+
+links — left
+
+rechts — right
+
+oben — up
+
+unten — down
+
+innen — inside
+
+außen — outside
+
+nah — near
+
+weit — far
+
+frei — free
+
+voll — full
+
+halb — half
+
+kurz — short
+
+lang — long
+
+schwer — heavy
+
+leicht — light
+
+stark — strong
+
+schwach — weak
+
+hell — bright
+
+dunkel — dark
+
+leise — quiet
+
+laut — loud
+
+sauber — clean
+
+schmutzig — dirty
+
+bequem — comfortable
+
+interessant — interesting
+
+langweilig — boring
+
+einfach — easy
+
+schwierig — difficult
+
+starten — start
+
+stoppen — stop
+
+sparen — save
+
+reisen — travel
+
+feiern — celebrate
+
+danken — thank
+
+öffnen — open
+
+schließen — close
+
+bitte — please
+
+danke — thanks
+
+hallo — hello
+
+tschüss — bye
+
+ja — yes
+
+nein — no
+
+vielleicht — maybe
+
+natürlich — of course
+
+genau — exactly
+
+wirklich — really
+
+sehr — very
+
+auch — also
+
+nur — only
+
+schon — already
+
+noch — still
+
+wieder — again
+
+zusammen — together
+
+allein — alone
+
+gern — gladly
+
+leider — unfortunately
+
+zuerst — first
+
+zuletzt — last
+
+gleich — same
+
+anders — different
+
+genug — enough
+
+fast — almost
+
+sofort — immediately
+
+bald — soon
+
+eins — one
+
+zwei — two
+
+drei — three
+
+vier — four
+
+fünf — five
+
+sechs — six
+
+sieben — seven
+
+acht — eight
+
+neun — nine
+
+zehn — ten
+
+elf — eleven
+
+zwölf — twelve
+
+dreizehn — thirteen
+
+vierzehn — fourteen
+
+fünfzehn — fifteen
+
+sechzehn — sixteen
+
+siebzehn — seventeen
+
+achtzehn — eighteen
+
+neunzehn — nineteen
+
+zwanzig — twenty
+
+dreißig — thirty
+
+vierzig — forty
+
+fünfzig — fifty
+
+hundert — hundred
+
+tausend — thousand
+
+der Name — name
+
+das Alter — age
+
+der Geburtstag — birthday
+
+die Nummer — number
+
+die Adresse — address
+
+die E-Mail — email
+
+das Telefon — telephone
+
+die Pause — break
+
+die Stunde — hour
+
+die Minute — minute
+
+die Sekunde — second
+
+der Sommer — summer
+
+der Winter — winter
+
+der Frühling — spring
+
+der Herbst — autumn
+
+Montag — Monday
+
+Dienstag — Tuesday
+
+Mittwoch — Wednesday
+
+Donnerstag — Thursday
+
+Freitag — Friday
+
+Samstag — Saturday
+
+Sonntag — Sunday
+
+Januar — January
+
+Februar — February
+
+März — March
+
+April — April
+
+Mai — May
+
+Juni — June
+
+Juli — July
+
+August — August
+
+September — September
+
+Oktober — October
+
+November — November
+
+Dezember — December
+
+der Platz — place
+
+der Park — park
+
+das Büro — office
+
+die Küche — kitchen
+
+das Bad — bathroom
+
+der Garten — garden
+
+die Party — party
+
+der Termin — appointment
+
+der Plan — plan
+
+die Hilfe — help
+
+der Anfang — beginning
+
+das Ende — end
+
+der Weg — way
+
+die Reise — trip
+
+die Karte — card/map
+
+das Ticket — ticket
+
+die Tasche — bag
+
+der Koffer — suitcase
+
+die Kleidung — clothes
+
+die Schuhe — shoes
+
+das Hemd — shirt
+
+die Hose — pants
+
+die Jacke — jacket
+
+das Wetter — weather
+
+der Regen — rain
+
+der Schnee — snow
+
+die Sonne — sun
+
+der Wind — wind
+
+die Wolke — cloud
+
+der Himmel — sky
+
+das Meer — sea
+
+der See — lake
+
+der Berg — mountain
+
+der Fluss — river
+
+die Insel — island
+
+das Dorf — village
+
+die Sprache — language
+
+Deutsch — German
+
+Englisch — English
+
+richtig — right
+
+falsch — wrong
+
+billig — cheap
+
+teuer — expensive
+
+sauber — clean
+
+nett — nice
+
+ruhig — calm
+
+aktiv — active
+
+bereit — ready
+
+sicher — safe
+
+möglich — possible
+
+klar — clear
+
+offen — open
+
+geschlossen — closed
+
+frei — free
+
+besetzt — occupied
+
+gemeinsam — together
+
+täglich — daily
+
+international — international
+
+regional — regional
+
+normal — normal
+
+speziell — special
+
+wichtig — important
+
+perfekt — perfect
+
+praktisch — practical
+
+privat — private
+
+öffentlich — public
+
+direkt — direct
+
+extra — extra
+
+positiv — positive
+
+negativ — negative
+
+freundlich — friendly

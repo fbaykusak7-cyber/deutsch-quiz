@@ -1,0 +1,800 @@
+anfangen — begin
+
+aufhören — stop
+
+anrufen — call
+
+aussehen — look like
+
+ausfüllen — fill out
+
+einladen — invite
+
+einkaufen — shop
+
+einschlafen — fall asleep
+
+erklären — explain
+
+erlauben — allow
+
+erzählen — tell
+
+verdienen — earn
+
+vergessen — forget
+
+vergleichen — compare
+
+vorbereiten — prepare
+
+verbessern — improve
+
+verändern — change
+
+passieren — happen
+
+gehören — belong
+
+genießen — enjoy
+
+diskutieren — discuss
+
+entscheiden — decide
+
+entwickeln — develop
+
+entdecken — discover
+
+empfehlen — recommend
+
+erhalten — receive
+
+erkennen — recognize
+
+erreichen — reach
+
+erscheinen — appear
+
+erleben — experience
+
+erwarten — expect
+
+folgen — follow
+
+führen — lead
+
+gebrauchen — use
+
+gelten — be valid
+
+handeln — act
+
+herstellen — produce
+
+informieren — inform
+
+reduzieren — reduce
+
+steigern — increase
+
+unterstützen — support
+
+vermeiden — avoid
+
+akzeptieren — accept
+
+ablehnen — reject
+
+beschreiben — describe
+
+bedeuten — mean
+
+beweisen — prove
+
+bieten — offer
+
+sparen — save
+
+investieren — invest
+
+ausgeben — spend
+
+leihen — lend
+
+mieten — rent
+
+kündigen — cancel
+
+unterschreiben — sign
+
+beantragen — apply for
+
+prüfen — check
+
+kontrollieren — control
+
+teilnehmen — participate
+
+zustimmen — agree
+
+widersprechen — disagree
+
+klären — clarify
+
+reagieren — react
+
+berichten — report
+
+planen — plan
+
+organisieren — organize
+
+sammeln — collect
+
+wechseln — change
+
+umziehen — move
+
+reservieren — reserve
+
+reparieren — repair
+
+bedienen — serve
+
+nutzen — use
+
+darstellen — present
+
+veröffentlichen — publish
+
+verschieben — postpone
+
+bestätigen — confirm
+
+beachten — pay attention
+
+beschäftigen — occupy
+
+drohen — threaten
+
+die Erfahrung — experience
+
+die Meinung — opinion
+
+das Beispiel — example
+
+der Unterschied — difference
+
+die Möglichkeit — possibility
+
+die Entscheidung — decision
+
+die Entwicklung — development
+
+die Erklärung — explanation
+
+die Einladung — invitation
+
+die Verbesserung — improvement
+
+die Veränderung — change
+
+das Ergebnis — result
+
+der Erfolg — success
+
+der Fehler — mistake
+
+die Lösung — solution
+
+das Problem — problem
+
+der Vorteil — advantage
+
+der Nachteil — disadvantage
+
+die Situation — situation
+
+die Zukunft — future
+
+die Vergangenheit — past
+
+die Gegenwart — present
+
+das Ziel — goal
+
+die Gesellschaft — society
+
+die Kultur — culture
+
+die Tradition — tradition
+
+der Vertrag — contract
+
+die Rechnung — bill
+
+die Bewerbung — application
+
+das Formular — form
+
+der Beruf — profession
+
+die Ausbildung — training
+
+das Studium — studies
+
+der Arbeitnehmer — employee
+
+der Arbeitgeber — employer
+
+das Gehalt — salary
+
+die Freizeit — free time
+
+die Veranstaltung — event
+
+die Teilnahme — participation
+
+die Anmeldung — registration
+
+die Abfahrt — departure
+
+die Ankunft — arrival
+
+die Unterkunft — accommodation
+
+der Aufenthalt — stay
+
+der Fahrplan — timetable
+
+die Gesundheit — health
+
+die Krankheit — illness
+
+die Behandlung — treatment
+
+die Versicherung — insurance
+
+der Unfall — accident
+
+die Gefahr — danger
+
+die Sicherheit — safety
+
+die Umwelt — environment
+
+der Verkehr — traffic
+
+die Beziehung — relationship
+
+der Kontakt — contact
+
+das Verhalten — behavior
+
+die Stimmung — mood
+
+der Charakter — character
+
+die Verantwortung — responsibility
+
+die Regel — rule
+
+die Ordnung — order
+
+der Grund — reason
+
+das Angebot — offer
+
+die Nachfrage — demand
+
+die Qualität — quality
+
+die Lieferung — delivery
+
+der Termin — appointment
+
+die Hilfe — help
+
+die Schwierigkeit — difficulty
+
+höflich — polite
+
+unhöflich — impolite
+
+möglich — possible
+
+unmöglich — impossible
+
+notwendig — necessary
+
+ähnlich — similar
+
+unterschiedlich — different
+
+erfolgreich — successful
+
+interessiert — interested
+
+zufrieden — satisfied
+
+unzufrieden — dissatisfied
+
+bequem — comfortable
+
+praktisch — practical
+
+besonders — special
+
+typisch — typical
+
+gemeinsam — together
+
+getrennt — separate
+
+deutlich — clear
+
+sicher — safe
+
+wahrscheinlich — probably
+
+trotzdem — nevertheless
+
+deshalb — therefore
+
+außerdem — besides
+
+während — while
+
+obwohl — although
+
+damit — so that
+
+deswegen — because of that
+
+sobald — as soon as
+
+inzwischen — meanwhile
+
+insgesamt — in total
+
+geduldig — patient
+
+nervös — nervous
+
+begeistert — excited
+
+enttäuscht — disappointed
+
+verfügbar — available
+
+offiziell — official
+
+regelmäßig — regular
+
+täglich — daily
+
+selten — rarely
+
+häufig — frequently
+
+entweder — either
+
+weder — neither
+
+sowohl — as well as
+
+jedoch — however
+
+denn — because
+
+falls — in case
+
+daher — therefore
+
+bislang — until now
+
+schließlich — finally
+
+ansonsten — otherwise
+
+
+die Prüfung — exam
+
+der Unterricht — lesson
+
+die Aufgabe — task
+
+die Technik — technology
+
+das Gerät — device
+
+die Information — information
+
+die Nachricht — message
+
+die Webseite — website
+
+das Passwort — password
+
+die Erinnerung — memory
+
+der Traum — dream
+
+die Hoffnung — hope
+
+die Angst — fear
+
+die Freude — joy
+
+der Stress — stress
+
+die Ruhe — calm
+
+die Stärke — strength
+
+die Schwäche — weakness
+
+die Überraschung — surprise
+
+das Geschenk — gift
+
+die Feier — celebration
+
+die Reise — journey
+
+der Service — service
+
+die Lieferung — delivery
+
+der Plan — plan
+
+der Weg — way
+
+die Umgebung — surroundings
+
+die Erfahrung — experience
+
+klar — clear
+
+ernst — serious
+
+ruhig — calm
+
+aktiv — active
+
+flexibel — flexible
+
+kreativ — creative
+
+positiv — positive
+
+negativ — negative
+
+fair — fair
+
+ehrlich — honest
+
+direkt — direct
+
+selbstständig — independent
+
+verantwortlich — responsible
+
+hilfreich — helpful
+
+gefährlich — dangerous
+
+bequem — comfortable
+
+notwendig — necessary
+
+international — international
+
+regional — regional
+
+privat — private
+
+öffentlich — public
+
+möglich — possible
+
+anbieten — offer
+
+aussteigen — get off
+
+einsteigen — get on
+
+mitbringen — bring along
+
+zurückgeben — give back
+
+weitergeben — pass on
+
+vorstellen — introduce
+
+teilnehmen — take part
+
+zurückkommen — come back
+
+aufstehen — get up
+
+einschalten — switch on
+
+ausschalten — switch off
+
+umsteigen — change trains
+
+nachfragen — ask again
+
+vorbereiten — prepare
+
+anmelden — register
+
+abmelden — deregister
+
+auspacken — unpack
+
+einpacken — pack
+
+mitmachen — join
+
+feststellen — determine
+
+gehören — belong
+
+gelten — apply
+
+empfehlen — recommend
+
+erleben — experience
+
+erwarten — expect
+
+erhöhen — increase
+
+senken — lower
+
+anbieten — offer
+
+vergleichen — compare
+
+der Eindruck — impression
+
+die Voraussetzung — requirement
+
+die Teilnahme — participation
+
+die Verantwortung — responsibility
+
+die Wirkung — effect
+
+die Erfahrung — experience
+
+der Fortschritt — progress
+
+die Unterstützung — support
+
+die Entscheidung — decision
+
+die Möglichkeit — possibility
+
+erstaunlich — amazing
+
+angenehm — pleasant
+
+anstrengend — exhausting
+
+bewusst — conscious
+
+dringend — urgent
+
+geeignet — suitable
+
+gemeinsam — together
+
+gleich — same
+
+komplett — complete
+
+korrekt — correct
+
+lebendig — lively
+
+modern — modern
+
+notwendig — necessary
+
+persönlich — personal
+
+praktisch — practical
+
+realistisch — realistic
+
+ruhig — calm
+
+sinnvoll — meaningful
+
+stark — strong
+
+unabhängig — independent
+
+verantwortlich — responsible
+
+vorsichtig — careful
+
+zuverlässig — reliable
+
+zufrieden — satisfied
+
+zusätzlich — additional
+
+trotzdem — nevertheless
+
+außerdem — besides
+
+hingegen — on the other hand
+
+mittlerweile — meanwhile
+
+weiterhin — furthermore
+
+einerseits — on one hand
+
+andererseits — on the other hand
+
+tatsächlich — actually
+
+ungefähr — approximately
+
+ursprünglich — originally
+
+mindestens — at least
+
+höchstens — at most
+
+insgesamt — in total
+
+meistens — mostly
+
+besonders — especially
+
+regelmäßig — regularly
+
+selten — rarely
+
+schließlich — finally
+
+plötzlich — suddenly
+
+sofort — immediately
+
+inzwischen — meanwhile
+
+weiterhin — still
+
+daneben — next to
+
+darüber — about it
+
+dafür — for it
+
+dagegen — against it
+
+damit — with it
+
+dabei — at the same time
+
+daran — on it
+
+darauf — on that
+
+darunter — under it
+
+darüber — over it
+
+dadurch — through that
+
+deswegen — because of that
+
+dennoch — nevertheless
+
+sofern — provided that
+
+solange — as long as
+
+sobald — as soon as
+
+obwohl — although
+
+während — while
+
+nachdem — after
+
+bevor — before
+
+sobald — as soon as
+
+falls — in case
+
+damit — so that
+
+der Bereich — area
+
+der Zusammenhang — connection
+
+die Bedingung — condition
+
+die Wahl — choice
+
+der Einfluss — influence
+
+der Fortschritt — progress
+
+die Gelegenheit — opportunity
+
+die Lösung — solution
+
+die Verantwortung — responsibility
+
+die Wirkung — effect
+
+aufmerksam — attentive
+
+begeistert — enthusiastic
+
+enttäuscht — disappointed
+
+entschlossen — determined
+
+geduldig — patient
+
+nervös — nervous
+
+neugierig — curious
+
+vorsichtig — careful
+
+wütend — angry
+
+zufrieden — satisfied
+
+regelmäßig — regular
+
+selten — rare
+
+häufig — frequent
+
+möglich — possible
+
+unmöglich — impossible
+
+notwendig — necessary
+
+ähnlich — similar
+
+unterschiedlich — different
+
+erfolgreich — successful
+
+interessiert — interested
+
+insgesamt — in total
+
+zusätzlich — additional
+
+gemeinsam — together
+
+getrennt — separate
+
+deutlich — clear
+
+sicher — safe
+
+wahrscheinlich — probably
+
+inzwischen — meanwhile
+
+schließlich — finally
+
+deswegen — because of that

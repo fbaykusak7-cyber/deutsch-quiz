@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Review</title>
+<style>
+body{font-family:Arial;background:#f8f9fc;padding:30px;}
+.card{background:white;padding:20px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+button{padding:8px 15px;border:none;border-radius:6px;background:#4e73df;color:white;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Wrong Answers</h2>
+
+{% if wrong_words %}
+<ul>
+{% for w in wrong_words %}
+<li><strong>{{w.de}}</strong> - {{w.en}}</li>
+{% endfor %}
+</ul>
+<a href="/clear_review"><button>Clear List</button></a>
+{% else %}
+<p>No wrong answers yet.</p>
+{% endif %}
+
+<br><br>
+<a href="/">← Back to Quiz</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,801 @@
+sein — be
+
+haben — have
+
+werden — become
+
+können — can
+
+müssen — must
+
+wollen — want
+
+sollen — should
+
+dürfen — may
+
+mögen — like
+
+machen — do / make
+
+gehen — go
+
+kommen — come
+
+sehen — see
+
+hören — hear
+
+sagen — say
+
+sprechen — speak
+
+fragen — ask
+
+antworten — answer
+
+geben — give
+
+nehmen — take
+
+finden — find
+
+bleiben — stay
+
+wohnen — live
+
+arbeiten — work
+
+lernen — learn
+
+spielen — play
+
+essen — eat
+
+trinken — drink
+
+schlafen — sleep
+
+kaufen — buy
+
+verkaufen — sell
+
+lesen — read
+
+schreiben — write
+
+fahren — drive
+
+laufen — run
+
+helfen — help
+
+lieben — love
+
+heißen — be called
+
+brauchen — need
+
+zahlen — pay
+
+öffnen — open
+
+schließen — close
+
+beginnen — begin
+
+enden — end
+
+warten — wait
+
+suchen — search
+
+zeigen — show
+
+denken — think
+
+glauben — believe
+
+hoffen — hope
+
+gewinnen — win
+
+verlieren — lose
+
+treffen — meet
+
+bringen — bring
+
+schicken — send
+
+rufen — call
+
+besuchen — visit
+
+erklären — explain
+
+verstehen — understand
+
+bestellen — order
+
+lachen — laugh
+
+weinen — cry
+
+tanzen — dance
+
+singen — sing
+
+kochen — cook
+
+putzen — clean
+
+reparieren — repair
+
+planen — plan
+
+entscheiden — decide
+
+versuchen — try
+
+anfangen — begin
+
+aufhören — stop
+
+anrufen — call
+
+aussehen — look like
+
+ausfüllen — fill out
+
+einladen — invite
+
+einkaufen — shop
+
+einschlafen — fall asleep
+
+verdienen — earn
+
+vergessen — forget
+
+vergleichen — compare
+
+vorbereiten — prepare
+
+verbessern — improve
+
+verändern — change
+
+passieren — happen
+
+gehören — belong
+
+genießen — enjoy
+
+diskutieren — discuss
+
+entwickeln — develop
+
+entdecken — discover
+
+empfehlen — recommend
+
+erhalten — receive
+
+erkennen — recognize
+
+erreichen — reach
+
+erscheinen — appear
+
+erleben — experience
+
+erwarten — expect
+
+folgen — follow
+
+führen — lead
+
+gebrauchen — use
+
+gelten — apply / be valid
+
+handeln — act
+
+herstellen — produce
+
+informieren — inform
+
+reduzieren — reduce
+
+steigern — increase
+
+unterstützen — support
+
+vermeiden — avoid
+
+akzeptieren — accept
+
+ablehnen — reject
+
+beschreiben — describe
+
+bedeuten — mean
+
+beweisen — prove
+
+bieten — offer
+
+sparen — save
+
+investieren — invest
+
+ausgeben — spend
+
+leihen — lend
+
+mieten — rent
+
+kündigen — cancel
+
+unterschreiben — sign
+
+beantragen — apply for
+
+prüfen — check
+
+kontrollieren — control
+
+teilnehmen — participate
+
+zustimmen — agree
+
+widersprechen — disagree
+
+klären — clarify
+
+reagieren — react
+
+berichten — report
+
+organisieren — organize
+
+sammeln — collect
+
+wechseln — change
+
+umziehen — move
+
+reservieren — reserve
+
+bedienen — serve
+
+darstellen — present
+
+veröffentlichen — publish
+
+verschieben — postpone
+
+bestätigen — confirm
+
+beachten — pay attention
+
+beschäftigen — occupy
+
+drohen — threaten
+
+fordern — demand
+
+ignorieren — ignore
+
+merken — notice
+
+nachdenken — think about
+
+retten — rescue
+
+schätzen — appreciate
+
+schützen — protect
+
+beitragen — contribute
+
+ermöglichen — enable
+
+verhindern — prevent
+
+verlangen — demand
+
+ersetzen — replace
+
+übertragen — transfer
+
+steigen — rise
+
+sinken — sink
+
+fallen — fall
+
+wachsen — grow
+
+schrumpfen — shrink
+
+erweitern — expand
+
+verbessern — enhance
+
+festlegen — determine
+
+feststellen — determine
+
+vorstellen — introduce
+
+vorstellen — imagine
+
+vorbereiten — get ready
+
+ankommen — arrive
+
+abreisen — depart
+
+einsteigen — get in
+
+aussteigen — get out
+
+mitbringen — bring along
+
+zurückgeben — give back
+
+weitergeben — pass on
+
+aufstehen — get up
+
+einschalten — switch on
+
+ausschalten — switch off
+
+umsteigen — change trains
+
+nachfragen — ask again
+
+anmelden — register
+
+abmelden — deregister
+
+auspacken — unpack
+
+einpacken — pack
+
+mitmachen — join
+
+eintreten — enter
+
+verlassen — leave
+
+betreten — enter
+
+zurückkommen — come back
+
+teilnehmen — take part
+
+betreuen — care for
+
+beraten — advise
+
+begrüßen — welcome
+
+verabschieden — say goodbye
+
+danken — thank
+
+entschuldigen — apologize
+
+empfehlen — advise
+
+bewerten — evaluate
+
+optimieren — optimize
+
+gestalten — design
+
+(Continuing same pattern…)
+
+dekorieren — decorate
+
+reinigen — clean
+
+pflegen — maintain
+
+warten — maintain
+
+sichern — secure
+
+überwachen — monitor
+
+alarmieren — alert
+
+evakuieren — evacuate
+
+empfangen — receive
+
+unterbringen — accommodate
+
+registrieren — register
+
+eintragen — enter
+
+absagen — cancel
+
+erneuern — renew
+
+transportieren — transport
+
+liefern — deliver
+
+kassieren — collect money
+
+abrechnen — settle bill
+
+kalkulieren — calculate
+
+analysieren — analyze
+
+präsentieren — present
+
+vermarkten — market
+
+expandieren — expand
+
+kooperieren — cooperate
+
+trainieren — train
+
+einstellen — hire
+
+verwalten — manage
+
+koordinieren — coordinate
+
+profitieren — benefit
+
+träumen — dream
+
+fotografieren — photograph
+
+erinnern — remember
+
+lächeln — smile
+
+begegnen — encounter
+
+bewundern — admire
+
+entdecken — explore
+
+erleben — go through
+
+folgen — pursue
+
+gründen — found
+
+heiraten — marry
+
+kündigen — resign
+
+landen — land
+
+lügen — lie
+
+meinen — mean
+
+nennen — name
+
+packen — grab
+
+prüfen — test
+
+retten — save
+
+scheinen — seem
+
+schicken — dispatch
+
+schließen — conclude
+
+schneiden — cut
+
+setzen — set
+
+sitzen — sit
+
+sparen — economize
+
+springen — jump
+
+stehen — stand
+
+sterben — die
+
+steigen — climb
+
+streiten — argue
+
+studieren — study
+
+suchen — look for
+
+tragen — carry
+
+treffen — hit
+
+trinken — consume
+
+tun — do
+
+übernachten — stay overnight
+
+überweisen — transfer money
+
+umgehen — handle
+
+unterrichten — teach
+
+unternehmen — undertake
+
+unterschätzen — underestimate
+
+unterstützen — assist
+
+verursachen — cause
+
+verbieten — forbid
+
+verbinden — connect
+
+verbrauchen — consume
+
+verdienen — deserve
+
+vereinbaren — arrange
+
+vergleichen — match
+
+vergessen — neglect
+
+verkaufen — trade
+
+verlassen — abandon
+
+vermeiden — prevent
+
+vermitteln — mediate
+
+versprechen — promise
+
+verstehen — comprehend
+
+versuchen — attempt
+
+vertreten — represent
+
+verwenden — use
+
+verzichten — do without
+
+vorbereiten — arrange
+
+vorschlagen — suggest
+
+vorstellen — present
+
+wachsen — increase
+
+wechseln — exchange
+
+werben — advertise
+
+werfen — throw
+
+wiederholen — repeat
+
+wirken — have effect
+
+wünschen — wish
+
+zahlen — settle
+
+zeigen — demonstrate
+
+ziehen — pull
+
+zunehmen — increase
+
+zurückkehren — return
+
+zusammenarbeiten — cooperate
+
+zustellen — deliver
+
+zustimmen — consent
+
+zweifeln — doubt
+
+akzeptieren — acknowledge
+
+antworten — reply
+
+arbeiten — function
+
+ausbilden — train
+
+ausleihen — borrow
+
+aussprechen — pronounce
+
+ausdrücken — express
+
+auswählen — select
+
+beantragen — request
+
+begleiten — accompany
+
+beginnen — commence
+
+berechnen — compute
+
+berichten — inform
+
+bestehen — exist
+
+beteiligen — involve
+
+betreiben — operate
+
+beweisen — demonstrate
+
+brechen — break
+
+danken — appreciate
+
+darstellen — depict
+
+entdecken — uncover
+
+empfehlen — endorse
+
+entscheiden — determine
+
+entfernen — remove
+
+entwickeln — create
+
+erfahren — learn
+
+erlauben — permit
+
+erreichen — accomplish
+
+erscheinen — emerge
+
+ersetzen — substitute
+
+erfahren — experience
+
+folgen — obey
+
+fördern — promote
+
+fordern — request
+
+funktionieren — function
+
+garantieren — guarantee
+
+genießen — appreciate
+
+gestalten — shape
+
+gewinnen — gain
+
+gründen — establish
+
+handeln — trade
+
+halten — hold
+
+hängen — hang
+
+heben — lift
+
+helfen — assist
+
+herstellen — manufacture
+
+hoffen — expect
+
+informieren — notify
+
+interessieren — interest
+
+investieren — fund
+
+kämpfen — fight
+
+kennen — know
+
+klagen — complain
+
+lachen — giggle
+
+leiten — direct
+
+liefern — supply
+
+lösen — resolve
+
+melden — report
+
+mischen — mix
+
+nutzen — utilize
+
+ordnen — arrange
+
+prüfen — examine
+
+reagieren — respond
+
+reduzieren — decrease
+
+retten — rescue
+
+schaffen — manage
+
+schenken — gift
+
+schützen — defend
+
+senden — transmit
+
+sinken — drop
+
+sorgen — care
+
+steigen — ascend
+
+stärken — strengthen
+
+stoppen — halt
+
+teilen — share
+
+treffen — encounter
+
+übertragen — convey
+
+überzeugen — convince
+
+verbessern — upgrade
+
+verbringen — spend time
+
+verhindern — block
+
+verlieren — misplace
+
+verwenden — apply
+
+vorbereiten — set up
+
+warnen — warn
+
+wirken — impact
+
+wünschen — desire
+
+zwingen — force
+
+zählen — count
+
+zuhören — listen

@@ -1,0 +1,803 @@
+das Hotel — hotel
+
+der Tourismus — tourism
+
+der Tourist — tourist
+
+die Touristin — female tourist
+
+die Reise — trip
+
+reisen — to travel
+
+die Buchung — booking
+
+buchen — to book
+
+die Reservierung — reservation
+
+reservieren — to reserve
+
+die Rezeption — reception
+
+der Rezeptionist — receptionist (male)
+
+die Rezeptionistin — receptionist (female)
+
+der Gast — guest
+
+die Gäste — guests
+
+das Zimmer — room
+
+das Einzelzimmer — single room
+
+das Doppelzimmer — double room
+
+die Suite — suite
+
+die Unterkunft — accommodation
+
+der Aufenthalt — stay
+
+einchecken — to check in
+
+auschecken — to check out
+
+der Check-in — check-in
+
+der Check-out — check-out
+
+der Schlüssel — key
+
+die Schlüsselkarte — key card
+
+der Ausweis — ID
+
+der Pass — passport
+
+die Anmeldung — registration
+
+das Formular — form
+
+unterschreiben — to sign
+
+der Preis — price
+
+die Rechnung — bill
+
+bezahlen — to pay
+
+die Zahlung — payment
+
+bar — cash
+
+die Kreditkarte — credit card
+
+die Bestätigung — confirmation
+
+bestätigen — to confirm
+
+stornieren — to cancel
+
+die Stornierung — cancellation
+
+das Frühstück — breakfast
+
+das Mittagessen — lunch
+
+das Abendessen — dinner
+
+das Buffet — buffet
+
+das Restaurant — restaurant
+
+die Speisekarte — menu
+
+bestellen — to order
+
+servieren — to serve
+
+das Getränk — drink
+
+das Wasser — water
+
+der Kaffee — coffee
+
+der Tee — tea
+
+der Service — service
+
+freundlich — friendly
+
+hilfsbereit — helpful
+
+die Sauberkeit — cleanliness
+
+sauber — clean
+
+die Reinigung — cleaning
+
+das Housekeeping — housekeeping
+
+das Personal — staff
+
+der Manager — manager
+
+der Direktor — director
+
+die Abteilung — department
+
+die Reservierungsabteilung — reservation department
+
+die Buchungsnummer — booking number
+
+verlängern — to extend
+
+die Verlängerung — extension
+
+der Komfort — comfort
+
+bequem — comfortable
+
+die Klimaanlage — air conditioning
+
+das WLAN — Wi-Fi
+
+kostenlos — free of charge
+
+inklusive — included
+
+exklusive — exclusive
+
+die Aussicht — view
+
+das Meer — sea
+
+der Strand — beach
+
+der Pool — pool
+
+das Fitnessstudio — gym
+
+das Spa — spa
+
+die Massage — massage
+
+entspannen — to relax
+
+die Entspannung — relaxation
+
+der Urlaub — vacation
+
+die Ferien — holidays
+
+der Reiseleiter — tour guide
+
+die Führung — guided tour
+
+besichtigen — to visit
+
+die Sehenswürdigkeit — attraction
+
+das Museum — museum
+
+die Altstadt — old town
+
+die Kultur — culture
+
+das Souvenir — souvenir
+
+kaufen — to buy
+
+verkaufen — to sell
+
+der Markt — market
+
+das Ticket — ticket
+
+der Flughafen — airport
+
+der Transfer — transfer
+
+der Shuttle — shuttle
+
+die Ankunft — arrival
+
+die Abreise — departure
+
+der Fahrplan — timetable
+
+der Bus — bus
+
+der Zug — train
+
+das Taxi — taxi
+
+mieten — to rent
+
+der Mietwagen — rental car
+
+die Versicherung — insurance
+
+sicher — safe
+
+die Sicherheit — security
+
+der Notfall — emergency
+
+die Information — information
+
+informieren — to inform
+
+die Broschüre — brochure
+
+der Prospekt — leaflet
+
+empfehlen — to recommend
+
+beliebt — popular
+
+international — international
+
+regional — regional
+
+lokal — local
+
+das Angebot — offer
+
+das Sonderangebot — special offer
+
+die Saison — season
+
+die Hochsaison — high season
+
+die Nebensaison — low season
+
+günstig — cheap
+
+teuer — expensive
+
+luxuriös — luxurious
+
+modern — modern
+
+traditionell — traditional
+
+renovieren — to renovate
+
+die Renovierung — renovation
+
+der Balkon — balcony
+
+die Terrasse — terrace
+
+der Garten — garden
+
+der Parkplatz — parking space
+
+die Garage — garage
+
+der Aufzug — elevator
+
+die Treppe — stairs
+
+das Gepäck — luggage
+
+der Koffer — suitcase
+
+tragen — to carry
+
+helfen — to help
+
+willkommen — welcome
+
+die Beschwerde — complaint
+
+sich beschweren — to complain
+
+lösen — to solve
+
+die Lösung — solution
+
+zufrieden — satisfied
+
+unzufrieden — dissatisfied
+
+die Bewertung — review
+
+bewerten — to rate
+
+online — online
+
+die Webseite — website
+
+die Plattform — platform
+
+vergleichen — to compare
+
+die Empfehlung — recommendation
+
+(Continuing same format…)
+
+die Konferenz — conference
+
+der Konferenzraum — conference room
+
+das Seminar — seminar
+
+die Tagung — meeting
+
+geschäftlich — business-related
+
+die Geschäftsreise — business trip
+
+der Veranstaltungsraum — event hall
+
+der Empfang — reception (event)
+
+der Cateringservice — catering service
+
+das Menü — menu set
+
+der Koch — cook
+
+der Kellner — waiter
+
+die Kellnerin — waitress
+
+die Bar — bar
+
+der Barkeeper — bartender
+
+die Minibar — minibar
+
+die Wäscherei — laundry
+
+waschen — to wash
+
+bügeln — to iron
+
+der Zimmerservice — room service
+
+die Wartung — maintenance
+
+reparieren — to repair
+
+der Techniker — technician
+
+die Klimaanlage — air conditioning system
+
+die Heizung — heating
+
+der Notausgang — emergency exit
+
+der Feueralarm — fire alarm
+
+der Sicherheitsdienst — security service
+
+die Kamera — camera
+
+überwachen — to monitor
+
+nachhaltig — sustainable
+
+der Ökotourismus — eco-tourism
+
+umweltfreundlich — environmentally friendly
+
+das Reiseziel — destination
+
+die Unterkunftsart — type of accommodation
+
+die Vollpension — full board
+
+die Halbpension — half board
+
+all-inclusive — all inclusive
+
+die Belegung — occupancy
+
+die Auslastung — capacity usage
+
+(Continuing…)
+
+der Umsatz — revenue
+
+der Gewinn — profit
+
+die Einnahmen — income
+
+die Kosten — costs
+
+das Marketing — marketing
+
+die Werbung — advertisement
+
+werben — to advertise
+
+die Zielgruppe — target group
+
+die Kundenzufriedenheit — customer satisfaction
+
+das Feedback — feedback
+
+die Statistik — statistics
+
+analysieren — to analyze
+
+planen — to plan
+
+organisieren — to organize
+
+koordinieren — to coordinate
+
+führen — to lead
+
+verwalten — to manage
+
+die Verwaltung — administration
+
+der Eigentümer — owner
+
+die Investition — investment
+
+expandieren — to expand
+
+die Expansion — expansion
+
+die Partnerschaft — partnership
+
+kooperieren — to cooperate
+
+der Vertrag — contract
+
+unterschreiben — to sign
+
+kündigen — to terminate
+
+verlängern — to renew
+
+das Visum — visa
+
+die Grenzkontrolle — border control
+
+der Zoll — customs
+
+der Reisepass — passport
+
+die Sicherheit — security
+
+der Notruf — emergency call
+
+die Hilfeleistung — assistance
+
+der Servicebereich — service area
+
+die Gästebetreuung — guest relations
+
+betreuen — to assist
+
+die Anfrage — inquiry
+
+anfragen — to inquire
+
+beantworten — to answer
+
+bearbeiten — to process
+
+bestätigen — to confirm
+
+weiterleiten — to forward
+
+speichern — to save (data)
+
+das System — system
+
+das Reservierungssystem — reservation system
+
+die Datenbank — database
+
+die Software — software
+
+der Computer — computer
+
+das Tablet — tablet
+
+das Telefon — telephone
+
+anrufen — to call
+
+entgegennehmen — to receive
+
+verbinden — to connect
+
+durchstellen — to transfer (call)
+
+notieren — to note
+
+überprüfen — to check
+
+ausdrucken — to print
+
+kopieren — to copy
+
+scannen — to scan
+
+archivieren — to archive
+
+die Schicht — shift
+
+der Dienstplan — duty roster
+
+arbeiten — to work
+
+einstellen — to hire
+
+der Mitarbeiter — employee
+
+die Mitarbeiterin — female employee
+
+die Schulung — training
+
+trainieren — to train
+
+die Qualifikation — qualification
+
+die Erfahrung — experience
+
+professionell — professional
+
+kompetent — competent
+
+effizient — efficient
+
+flexibel — flexible
+
+pünktlich — punctual
+
+zuverlässig — reliable
+
+höflich — polite
+
+respektvoll — respectful
+
+aufmerksam — attentive
+
+diskret — discreet
+
+organisiert — organized
+
+verantwortlich — responsible
+
+engagiert — committed
+
+motiviert — motivated
+
+kreativ — creative
+
+innovativ — innovative
+
+modern — modern
+
+luxuriös — luxurious
+
+traditionell — traditional
+
+zentral — central
+
+ruhig — quiet
+
+familienfreundlich — family-friendly
+
+barrierefrei — barrier-free
+
+haustierfreundlich — pet-friendly
+
+klimatisiert — air-conditioned
+
+möbliert — furnished
+
+renoviert — renovated
+
+ausgestattet — equipped
+
+verfügbar — available
+
+belegt — occupied
+
+frei — vacant
+
+reserviert — reserved
+
+bestätigt — confirmed
+
+storniert — canceled
+
+verlängert — extended
+
+bezahlt — paid
+
+offen — open
+
+geschlossen — closed
+
+betreten — to enter
+
+verlassen — to leave
+
+informieren — to inform
+
+begrüßen — to welcome
+
+verabschieden — to say goodbye
+
+danken — to thank
+
+entschuldigen — to apologize
+
+erklären — to explain
+
+empfehlen — to recommend
+
+unterstützen — to support
+
+beraten — to advise
+
+reservieren — to reserve
+
+planen — to plan
+
+organisieren — to organize
+
+koordinieren — to coordinate
+
+überwachen — to supervise
+
+kontrollieren — to control
+
+prüfen — to check
+
+verbessern — to improve
+
+entwickeln — to develop
+
+erweitern — to expand
+
+investieren — to invest
+
+vermarkten — to market
+
+präsentieren — to present
+
+anbieten — to offer
+
+verkaufen — to sell
+
+abrechnen — to settle bill
+
+kassieren — to collect payment
+
+einnehmen — to take in
+
+sparen — to save
+
+kalkulieren — to calculate
+
+analysieren — to analyze
+
+bewerten — to evaluate
+
+optimieren — to optimize
+
+gestalten — to design
+
+dekorieren — to decorate
+
+reinigen — to clean
+
+pflegen — to maintain
+
+reparieren — to repair
+
+warten — to maintain (technical)
+
+sichern — to secure
+
+schützen — to protect
+
+überwachen — to monitor
+
+alarmieren — to alert
+
+evakuieren — to evacuate
+
+retten — to rescue
+
+betreuen — to care for
+
+bedienen — to serve
+
+kochen — to cook
+
+servieren — to serve
+
+mischen — to mix
+
+einschenken — to pour
+
+vorbereiten — to prepare
+
+liefern — to deliver
+
+transportieren — to transport
+
+empfangen — to receive
+
+unterbringen — to accommodate
+
+registrieren — to register
+
+eintragen — to enter (data)
+
+bestätigen — to confirm
+
+absagen — to cancel
+
+verschieben — to postpone
+
+verlängern — to extend
+
+erneuern — to renew
+
+abreisen — to depart
+
+ankommen — to arrive
+
+buchen — to book
+
+reisen — to travel
+
+besichtigen — to visit
+
+entspannen — to relax
+
+genießen — to enjoy
+
+erleben — to experience
+
+entdecken — to discover
+
+fotografieren — to photograph
+
+erinnern — to remember
+
+empfehlen — to recommend
+
+bewerten — to review
+
+zurückkehren — to return
+
+planen — to plan
+
+träumen — to dream
+
+arbeiten — to work
+
+führen — to lead
+
+verwalten — to manage
+
+verbessern — to improve
+
+erweitern — to expand
+
+investieren — to invest
+
+wachsen — to grow
+
+entwickeln — to develop
+
+profitieren — to benefit
+
+erfolgreich — successful
