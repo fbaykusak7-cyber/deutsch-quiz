@@ -7,11 +7,9 @@
 
 <style>
 
-/* ===== GENEL ===== */
-
 body{
   margin:0;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family:Arial, sans-serif;
   background:linear-gradient(135deg,#1e3c72,#2a5298);
   display:flex;
   justify-content:center;
@@ -23,82 +21,33 @@ body{
   background:white;
   border-radius:18px;
   box-shadow:0 20px 50px rgba(0,0,0,0.3);
-  transition:0.3s;
+  width:95%;
+  max-width:800px;
+  padding:25px;
+  text-align:center;
 }
 
-/* ===== MASAÜSTÜ ===== */
-
-@media (min-width: 900px){
-
-  .card{
-    width:800px;
-    padding:40px;
-  }
-
-  h2{
-    font-size:38px;
-  }
-
-  button.answer{
-    font-size:18px;
-    padding:16px;
-  }
-
+@media(min-width:900px){
+  .card{padding:40px;}
+  h2{font-size:38px;}
 }
-
-/* ===== TABLET ===== */
-
-@media (min-width: 600px) and (max-width: 899px){
-
-  .card{
-    width:600px;
-    padding:30px;
-  }
-
-  h2{
-    font-size:30px;
-  }
-
-}
-
-/* ===== MOBİL ===== */
-
-@media (max-width: 599px){
-
-  .card{
-    width:95%;
-    padding:20px;
-  }
-
-  h2{
-    font-size:24px;
-  }
-
-  button.answer{
-    font-size:15px;
-    padding:14px;
-  }
-
-}
-
-/* ===== ORTAK STİL ===== */
 
 .catbar{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
   justify-content:center;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
 .cat{
-  padding:7px 12px;
+  padding:6px 10px;
   border-radius:8px;
   text-decoration:none;
   background:#eef2ff;
   color:#1f2a44;
-  font-weight:600;
   font-size:14px;
+  font-weight:600;
 }
 
 .cat.active{
@@ -109,33 +58,49 @@ body{
 .stats{
   font-size:14px;
   margin-bottom:15px;
-  color:#444;
+}
+
+.score{
+  font-weight:bold;
+  display:inline-block;
+  transition:0.3s;
+}
+
+.bounce{
+  animation:bounce 0.4s;
+}
+
+@keyframes bounce{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.4);}
+  100%{transform:scale(1);}
 }
 
 button.answer{
   width:100%;
-  margin-top:10px;
+  padding:14px;
+  margin-top:8px;
   border:none;
   border-radius:10px;
   background:#2a5298;
   color:white;
+  font-size:16px;
   cursor:pointer;
-  transition:0.2s;
-}
-
-button.answer:hover{
-  background:#1e3c72;
-}
-
-button.answer:active{
-  transform:scale(0.97);
 }
 
 .feedback{
-  height:25px;
-  margin:10px 0;
+  height:24px;
+  margin:8px 0;
   font-weight:bold;
   font-size:16px;
+}
+
+.correct{
+  color:#1db954;
+}
+
+.wrong{
+  color:#e63946;
 }
 
 </style>
@@ -159,7 +124,7 @@ button.answer:active{
 Category: {{selected_level.upper()}} |
 Level {{level_number}} |
 XP {{xp}} |
-Score {{score}} / {{total}}
+Score <span id="scoreValue" class="score">{{score}}</span> / {{total}}
 </div>
 
 <h2 id="word">{{german}}</h2>
@@ -175,54 +140,80 @@ Score {{score}} / {{total}}
 
 <script>
 
-// 🔊 MOBİL + DESKTOP SES
+let audioUnlocked=false;
+
+function unlockAudio(){
+  if(audioUnlocked) return;
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  ctx.resume();
+  audioUnlocked=true;
+}
+
+document.addEventListener("touchstart",unlockAudio,{once:true});
+document.addEventListener("click",unlockAudio,{once:true});
 
 function speak(text){
-  const u = new SpeechSynthesisUtterance(text);
+  if(!audioUnlocked) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
   u.lang="de-DE";
   u.rate=0.9;
-  speechSynthesis.cancel();
   speechSynthesis.speak(u);
 }
 
 function playCorrect(){
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
+  if(!audioUnlocked) return;
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const o=ctx.createOscillator();
+  const g=ctx.createGain();
   o.type="triangle";
-  o.frequency.value=950;
-  g.gain.value=0.35;
-  o.connect(g); g.connect(ctx.destination);
+  o.frequency.value=900;
+  g.gain.value=0.4;
+  o.connect(g);
+  g.connect(ctx.destination);
   o.start();
-  o.stop(ctx.currentTime+0.18);
+  o.stop(ctx.currentTime+0.2);
 }
 
 function playWrong(){
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
+  if(!audioUnlocked) return;
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const o=ctx.createOscillator();
+  const g=ctx.createGain();
   o.type="sawtooth";
   o.frequency.value=200;
-  g.gain.value=0.35;
-  o.connect(g); g.connect(ctx.destination);
+  g.gain.value=0.4;
+  o.connect(g);
+  g.connect(ctx.destination);
   o.start();
   o.stop(ctx.currentTime+0.25);
 }
 
 window.onload=function(){
-  setTimeout(()=>speak(document.getElementById("word").innerText),400);
 
   const fb="{{feedback}}";
+  const fbEl=document.getElementById("fb");
 
   if(fb==="correct"){
-    document.getElementById("fb").innerText="Correct ✅";
+    fbEl.innerText="Correct";
+    fbEl.className="feedback correct";
     playCorrect();
+
+    // skor animasyonu
+    const scoreEl=document.getElementById("scoreValue");
+    scoreEl.classList.add("bounce");
+    setTimeout(()=>scoreEl.classList.remove("bounce"),400);
   }
 
   if(fb==="wrong"){
-    document.getElementById("fb").innerText="Wrong ❌";
+    fbEl.innerText="Wrong";
+    fbEl.className="feedback wrong";
     playWrong();
   }
+
+  setTimeout(()=>{
+    speak(document.getElementById("word").innerText);
+  },500);
 }
 
 </script>
