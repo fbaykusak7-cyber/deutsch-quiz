@@ -1,401 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Quiz</title>
 
 <style>
-  body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#1e3c72,#2a5298);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-  }
-  .card{
-    background:#fff;
-    width:95%;
-    max-width:900px;
-    padding:22px;
-    border-radius:18px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.30);
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  @media(min-width:900px){
-    .card{ padding:40px; }
-    #word{ font-size:40px; }
-  }
-  @media(max-width:450px){
-    #word{ font-size:26px; }
-    .cat{ font-size:13px; padding:6px 10px; }
-  }
-
-  .catbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    justify-content:center;
-    margin-bottom:14px;
-  }
-  .cat{
-    padding:7px 12px;
-    border-radius:10px;
-    background:#eef2ff;
-    color:#1f2a44;
-    font-weight:700;
-    border:1px solid #d8def0;
-    cursor:pointer;
-    user-select:none;
-  }
-  .cat.active{
-    background:#2a5298;
-    color:#fff;
-    border-color:#2a5298;
-  }
-
-  .stats{
-    font-size:14px;
-    color:#334;
-    margin-bottom:10px;
-  }
-  .score{ font-weight:800; }
-
-  #word{
-    margin:14px 0 10px 0;
-    font-size:32px;
-    font-weight:900;
-  }
-
-  .listen{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#111827;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    margin-bottom:10px;
-  }
-
-  .feedback{
-    height:26px;
-    font-weight:900;
-    font-size:18px;
-    margin:8px 0 2px 0;
-  }
-  .correct{ color:#16a34a; }
-  .wrong{ color:#dc2626; }
-
-  .answers{ margin-top:6px; }
-  .answer{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:12px;
-    background:#2a5298;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-  }
-  .answer:active{ transform:scale(0.98); }
-
-  .hint{
-    margin-top:8px;
-    font-size:12px;
-    color:#667;
-  }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+.card{
+  background:#fff;
+  width:95%;
+  max-width:900px;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.30);
+  text-align:center;
+}
+.catbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-bottom:14px;
+}
+.cat{
+  padding:7px 12px;
+  border-radius:10px;
+  background:#eef2ff;
+  cursor:pointer;
+  font-weight:700;
+}
+.cat.active{
+  background:#2a5298;
+  color:#fff;
+}
+.stats{
+  font-size:14px;
+  margin-bottom:10px;
+}
+#word{
+  margin:14px 0;
+  font-size:30px;
+  font-weight:900;
+}
+.answer{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  background:#2a5298;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+.feedback{
+  height:26px;
+  font-weight:900;
+  font-size:18px;
+  margin:8px 0;
+}
+.correct{ color:#16a34a; }
+.wrong{ color:#dc2626; }
 </style>
 </head>
 
 <body>
+
 <div class="card">
 
-  <div class="catbar" id="catbar">
-    <span class="cat" data-cat="a1">A1</span>
-    <span class="cat" data-cat="a2">A2</span>
-    <span class="cat" data-cat="hotel">Hotel</span>
-    <span class="cat" data-cat="verb">Verb</span>
-    <span class="cat" data-cat="pronouns">Pronouns</span>
-    <span class="cat" data-cat="mixed">Mixed</span>
-    <span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
-  </div>
+<div class="catbar" id="catbar">
+<span class="cat" data-cat="a1">A1</span>
+<span class="cat" data-cat="a2">A2</span>
+<span class="cat" data-cat="hotel">Hotel</span>
+<span class="cat" data-cat="verb">Verb</span>
+<span class="cat" data-cat="pronouns">Pronouns</span>
+<span class="cat" data-cat="mixed">Mixed</span>
+<span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
+</div>
 
-  <div class="stats">
-    Category: <span id="catName">{{selected_level|upper}}</span> |
-    Level <span id="levelNum">{{level_number}}</span> |
-    XP <span id="xpVal">{{xp}}</span> |
-    Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
-  </div>
+<div class="stats">
+Category: <span id="catName">{{selected_level|upper}}</span> |
+Level <span id="levelNum">{{level_number}}</span> |
+XP <span id="xpVal">{{xp}}</span> |
+Score <span id="scoreValue">{{score}}</span> / <span id="totalValue">{{total}}</span>
+</div>
 
-  <div id="word">{{german}}</div>
+<div id="word">{{german}}</div>
 
-  <button class="listen" id="listenBtn" type="button">🔊 Listen (German)</button>
+<div id="fb" class="feedback"></div>
 
-  <div id="fb" class="feedback"></div>
+<div id="answers">
+{% for o in options %}
+<button class="answer" data-answer="{{o}}">{{o}}</button>
+{% endfor %}
+</div>
 
-  <div class="answers" id="answers">
-    {% for o in options %}
-      <button class="answer" type="button" data-answer="{{o}}">{{o}}</button>
-    {% endfor %}
-  </div>
-
-  <div class="hint">iPhone: ilk ses için bir kere Listen’a bas veya bir şık seç.</div>
 </div>
 
 <script>
-/* =========================================================
-   STABLE CORE (Fixes everything that broke)
-   - Options always clickable (event delegation)
-   - Auto speak works after first interaction (iOS rule)
-   - Best German voice selection (Siri/Enhanced/Natural/Google)
-   - Correct chime + Wrong "dit" (louder)
-   ========================================================= */
+
+/* =========================
+   CLEAN GERMAN TTS SYSTEM
+   ========================= */
 
 let userInteracted = false;
-
-/* ---------- AudioContext for SFX ---------- */
-let audioCtx = null;
-function ensureAudioCtx(){
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  if(audioCtx.state === "suspended"){
-    audioCtx.resume();
-  }
-}
-
-/* louder correct chime */
-function sfxCorrect(){
-  if(!audioCtx) return;
-  const t = audioCtx.currentTime;
-  const g = audioCtx.createGain();
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(0.95, t + 0.015);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
-
-  const o1 = audioCtx.createOscillator();
-  o1.type = "sine";
-  o1.frequency.setValueAtTime(880, t);
-
-  const o2 = audioCtx.createOscillator();
-  o2.type = "sine";
-  o2.frequency.setValueAtTime(1320, t + 0.06);
-
-  o1.connect(g); o2.connect(g); g.connect(audioCtx.destination);
-  o1.start(t); o1.stop(t + 0.16);
-  o2.start(t + 0.06); o2.stop(t + 0.22);
-}
-
-/* louder wrong dit */
-function sfxWrong(){
-  if(!audioCtx) return;
-  const t = audioCtx.currentTime;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-
-  o.type = "square";
-  o.frequency.setValueAtTime(700, t);
-
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(0.9, t + 0.01);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
-
-  o.connect(g); g.connect(audioCtx.destination);
-  o.start(t); o.stop(t + 0.11);
-}
-
-/* ---------- Best German TTS voice ---------- */
 let bestVoice = null;
 
-function voiceScore(v){
-  const lang = (v.lang || "").toLowerCase();
-  const name = (v.name || "").toLowerCase();
-  let s = 0;
-
-  if(lang.startsWith("de")) s += 1000;
-  if(lang === "de-de") s += 150;
-
-  // iOS often has Siri voices
-  if(name.includes("siri")) s += 500;
-  if(name.includes("premium")) s += 400;
-  if(name.includes("enhanced")) s += 350;
-  if(name.includes("natural")) s += 300;
-  if(name.includes("google")) s += 250;
-
-  if(v.default) s += 40;
-
-  return s;
-}
-
-function pickBestGermanVoice(){
+/* Pick best German voice */
+function pickBestVoice(){
   if(!('speechSynthesis' in window)) return;
+
   const voices = speechSynthesis.getVoices();
   if(!voices || !voices.length) return;
 
-  const german = voices.filter(v => (v.lang || "").toLowerCase().startsWith("de"));
-  if(!german.length){
-    bestVoice = null;
-    return;
-  }
-  german.sort((a,b)=>voiceScore(b)-voiceScore(a));
-  bestVoice = german[0];
+  const german = voices.filter(v =>
+    v.lang && v.lang.toLowerCase().startsWith("de")
+  );
+
+  if(!german.length) return;
+
+  bestVoice = german.find(v =>
+    /premium|enhanced|google|natural|siri/i.test(v.name)
+  ) || german[0];
 }
 
 if('speechSynthesis' in window){
-  pickBestGermanVoice();
-  speechSynthesis.onvoiceschanged = pickBestGermanVoice;
-  // iOS voice list may appear later
-  setTimeout(()=>{ try{ speechSynthesis.getVoices(); }catch(e){} }, 150);
-  setTimeout(()=>{ pickBestGermanVoice(); }, 600);
+  pickBestVoice();
+  speechSynthesis.onvoiceschanged = pickBestVoice;
 }
 
 function speakGerman(text){
-  if(!('speechSynthesis' in window)) return;
-  if(!userInteracted) return; // iOS rule: only after interaction
+  if(!userInteracted) return;
 
-  pickBestGermanVoice();
   try{ speechSynthesis.cancel(); }catch(e){}
 
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "de-DE";
-  u.rate = 0.9;
-  u.pitch = 1;
-  if(bestVoice) u.voice = bestVoice;
+  u.lang="de-DE";
+  u.rate=0.9;
 
-  try{ speechSynthesis.speak(u); }catch(e){}
+  if(bestVoice){
+    u.voice = bestVoice;
+  }
+
+  speechSynthesis.speak(u);
 }
 
 function autoSpeak(){
-  const w = document.getElementById("word");
-  if(!w) return;
-  // small delay helps iOS
-  setTimeout(()=>speakGerman(w.innerText), 200);
+  const w=document.getElementById("word");
+  if(w){
+    setTimeout(()=>speakGerman(w.innerText),200);
+  }
 }
 
-/* ---------- UI helpers ---------- */
-function setActiveCategory(cat){
-  document.querySelectorAll(".cat").forEach(el=>{
-    el.classList.toggle("active", el.dataset.cat === cat);
-  });
-}
+/* Unlock after first interaction (iOS rule) */
+document.addEventListener("click",()=>{
+  userInteracted=true;
+},{once:true});
+
+/* =========================
+   UI + AJAX
+   ========================= */
 
 function setFeedback(type){
-  const fb = document.getElementById("fb");
-  if(type === "correct"){
-    fb.textContent = "Correct";
-    fb.className = "feedback correct";
-    sfxCorrect();
-  } else if(type === "wrong"){
-    fb.textContent = "Wrong";
-    fb.className = "feedback wrong";
-    sfxWrong();
-  } else {
-    fb.textContent = "";
-    fb.className = "feedback";
+  const fb=document.getElementById("fb");
+
+  if(type==="correct"){
+    fb.textContent="Correct";
+    fb.className="feedback correct";
+  }
+  else if(type==="wrong"){
+    fb.textContent="Wrong";
+    fb.className="feedback wrong";
+  }
+  else{
+    fb.textContent="";
+    fb.className="feedback";
   }
 }
 
 function renderOptions(options){
-  const wrap = document.getElementById("answers");
-  wrap.innerHTML = "";
-  (options || []).forEach(opt=>{
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "answer";
-    b.dataset.answer = opt;
-    b.textContent = opt;
+  const wrap=document.getElementById("answers");
+  wrap.innerHTML="";
+
+  options.forEach(opt=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.dataset.answer=opt;
+    b.textContent=opt;
     wrap.appendChild(b);
   });
 }
 
-function applyState(data, feedbackOverride){
-  document.getElementById("word").textContent = data.german;
-  document.getElementById("scoreValue").textContent = data.score;
-  document.getElementById("totalValue").textContent = data.total;
-  document.getElementById("xpVal").textContent = data.xp;
-  document.getElementById("levelNum").textContent = data.level_number;
-  document.getElementById("catName").textContent = (data.selected_level || "").toUpperCase();
-  document.getElementById("wrongTab").textContent = "Wrong (" + (data.wrong_count || 0) + ")";
-  setActiveCategory(data.selected_level || "a1");
+function applyState(data){
+  document.getElementById("word").textContent=data.german;
+  document.getElementById("scoreValue").textContent=data.score;
+  document.getElementById("totalValue").textContent=data.total;
+  document.getElementById("xpVal").textContent=data.xp;
+  document.getElementById("levelNum").textContent=data.level_number;
+  document.getElementById("catName").textContent=(data.selected_level||"").toUpperCase();
+  document.getElementById("wrongTab").textContent="Wrong ("+(data.wrong_count||0)+")";
 
-  renderOptions(data.options || []);
-  setFeedback(feedbackOverride || data.feedback || "");
-
-  autoSpeak(); // automatic pronunciation (after first user interaction)
+  renderOptions(data.options||[]);
+  setFeedback(data.feedback||"");
+  autoSpeak();
 }
 
-/* ---------- API ---------- */
-async function apiPost(url, payload){
-  const r = await fetch(url, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(payload || {})
+async function apiPost(url,data){
+  const r=await fetch(url,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(data||{})
   });
   return await r.json();
 }
 
-async function refreshState(){
-  const r = await fetch("/api/state");
-  const data = await r.json();
-  applyState(data, "");
+async function refresh(){
+  const r=await fetch("/api/state");
+  const data=await r.json();
+  applyState(data);
 }
 
-/* ---------- Interaction unlock (ONE TIME) ---------- */
-function onFirstInteraction(){
-  userInteracted = true;
-  ensureAudioCtx();
-  // after unlocking, speak current word once
-  autoSpeak();
-  document.removeEventListener("touchstart", onFirstInteraction);
-  document.removeEventListener("click", onFirstInteraction);
-}
-document.addEventListener("touchstart", onFirstInteraction, {passive:true});
-document.addEventListener("click", onFirstInteraction, {passive:true});
-
-/* ---------- Event delegation (THIS FIXES “buttons not working”) ---------- */
-document.getElementById("answers").addEventListener("click", async (e)=>{
-  const btn = e.target.closest(".answer");
+document.getElementById("answers").addEventListener("click",async(e)=>{
+  const btn=e.target.closest(".answer");
   if(!btn) return;
 
-  userInteracted = true;
-  ensureAudioCtx();
+  userInteracted=true;
 
-  const ans = btn.dataset.answer;
-  const data = await apiPost("/api/answer", {answer: ans});
-  applyState(data, data.feedback);
+  const ans=btn.dataset.answer;
+  const data=await apiPost("/api/answer",{answer:ans});
+  applyState(data);
 });
 
-document.getElementById("catbar").addEventListener("click", async (e)=>{
-  const tab = e.target.closest(".cat");
+document.getElementById("catbar").addEventListener("click",async(e)=>{
+  const tab=e.target.closest(".cat");
   if(!tab) return;
 
-  userInteracted = true;
-  ensureAudioCtx();
+  userInteracted=true;
 
-  const cat = tab.dataset.cat;
-  const data = await apiPost("/api/set_category", {category: cat});
-  applyState(data, "");
+  const data=await apiPost("/api/set_category",{category:tab.dataset.cat});
+  applyState(data);
 });
 
-/* Listen button: manual speak + unlock */
-document.getElementById("listenBtn").addEventListener("click", ()=>{
-  userInteracted = true;
-  ensureAudioCtx();
-  autoSpeak();
-});
-
-/* Initial load */
-window.addEventListener("load", ()=>{
-  refreshState();
-});
+window.addEventListener("load",refresh);
 
 </script>
+
 </body>
 </html>
