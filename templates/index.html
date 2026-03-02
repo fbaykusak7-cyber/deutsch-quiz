@@ -1,355 +1,226 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Quiz</title>
 
 <style>
-  body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#1e3c72,#2a5298);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-  }
-  .card{
-    background:#fff;
-    width:95%;
-    max-width:900px;
-    padding:22px;
-    border-radius:18px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.30);
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  @media(min-width:900px){
-    .card{ padding:40px; }
-    #word{ font-size:40px; }
-  }
-  @media(max-width:450px){
-    #word{ font-size:26px; }
-    .cat{ font-size:13px; padding:6px 10px; }
-  }
-
-  .catbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    justify-content:center;
-    margin-bottom:14px;
-  }
-  .cat{
-    text-decoration:none;
-    padding:7px 12px;
-    border-radius:10px;
-    background:#eef2ff;
-    color:#1f2a44;
-    font-weight:700;
-    border:1px solid #d8def0;
-    cursor:pointer;
-  }
-  .cat.active{
-    background:#2a5298;
-    color:#fff;
-    border-color:#2a5298;
-  }
-
-  .stats{
-    font-size:14px;
-    color:#334;
-    margin-bottom:10px;
-  }
-  .score{
-    display:inline-block;
-    font-weight:800;
-  }
-  .bounce{ animation:bounce 0.35s; }
-  @keyframes bounce{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.45);}
-    100%{transform:scale(1);}
-  }
-
-  #word{
-    margin:14px 0 10px 0;
-    font-size:32px;
-    font-weight:900;
-  }
-
-  .listen{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#111827;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    margin-bottom:10px;
-  }
-
-  .answers{
-    margin-top:6px;
-  }
-
-  .answer{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:12px;
-    background:#2a5298;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-  }
-  .answer:active{ transform:scale(0.98); }
-
-  .feedback{
-    height:26px;
-    font-weight:900;
-    font-size:18px;
-    margin:8px 0 2px 0;
-  }
-  .correct{ color:#16a34a; }
-  .wrong{ color:#dc2626; }
-
-  /* iPhone sound gate */
-  .gate{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.85);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    z-index:9999;
-  }
-  .gate.show{ display:flex; }
-  .gatebox{
-    background:#fff;
-    border-radius:16px;
-    padding:18px;
-    max-width:520px;
-    width:100%;
-    text-align:center;
-  }
-  .gatebtn{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#2a5298;
-    color:#fff;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-  }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+.card{
+  background:#fff;
+  width:95%;
+  max-width:900px;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.30);
+  text-align:center;
+}
+.catbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-bottom:14px;
+}
+.cat{
+  padding:7px 12px;
+  border-radius:10px;
+  background:#eef2ff;
+  cursor:pointer;
+  font-weight:700;
+  border:1px solid #d8def0;
+}
+.cat.active{
+  background:#2a5298;
+  color:#fff;
+  border-color:#2a5298;
+}
+.stats{
+  font-size:14px;
+  margin-bottom:10px;
+}
+.score{
+  font-weight:800;
+}
+#word{
+  margin:14px 0;
+  font-size:30px;
+  font-weight:900;
+}
+.answer{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  background:#2a5298;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+.feedback{
+  height:26px;
+  font-weight:900;
+  font-size:18px;
+  margin:8px 0;
+}
+.correct{ color:#16a34a; }
+.wrong{ color:#dc2626; }
 </style>
 </head>
 
 <body>
+
 <div class="card">
 
-  <div class="catbar" id="catbar">
-    <span class="cat" data-cat="a1">A1</span>
-    <span class="cat" data-cat="a2">A2</span>
-    <span class="cat" data-cat="hotel">Hotel</span>
-    <span class="cat" data-cat="verb">Verb</span>
-    <span class="cat" data-cat="pronouns">Pronouns</span>
-    <span class="cat" data-cat="mixed">Mixed</span>
-    <span class="cat" data-cat="wrong" id="wrongTab">Wrong (0)</span>
-  </div>
+<div class="catbar">
+<span class="cat" data-cat="a1">A1</span>
+<span class="cat" data-cat="a2">A2</span>
+<span class="cat" data-cat="hotel">Hotel</span>
+<span class="cat" data-cat="verb">Verb</span>
+<span class="cat" data-cat="pronouns">Pronouns</span>
+<span class="cat" data-cat="mixed">Mixed</span>
+<span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
+</div>
 
-  <div class="stats">
-    Category: <span id="catName">{{selected_level|upper}}</span> |
-    Level <span id="levelNum">{{level_number}}</span> |
-    XP <span id="xpVal">{{xp}}</span> |
-    Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
-  </div>
+<div class="stats">
+Category: <span id="catName">{{selected_level|upper}}</span> |
+Level <span id="levelNum">{{level_number}}</span> |
+XP <span id="xpVal">{{xp}}</span> |
+Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
+</div>
 
-  <div id="word">{{german}}</div>
+<div id="word">{{german}}</div>
 
-  <button class="listen" id="listenBtn">Listen (German)</button>
+<div id="fb" class="feedback"></div>
 
-  <div id="fb" class="feedback"></div>
-
-  <div class="answers" id="answers">
-    {% for o in options %}
-      <button class="answer" data-answer="{{o}}">{{o}}</button>
-    {% endfor %}
-  </div>
-
-  <div id="gate" class="gate">
-    <div class="gatebox">
-      <h3>Enable Sound</h3>
-      <p>iPhone/Safari için ses izni gerekir. Bir kere açınca otomatik konuşma ve doğru/yanlış sesleri çalışır.</p>
-      <button class="gatebtn" id="enableBtn">Enable sound</button>
-    </div>
-  </div>
+<div id="answers">
+{% for o in options %}
+<button class="answer" data-answer="{{o}}">{{o}}</button>
+{% endfor %}
+</div>
 
 </div>
 
 <script>
-/* =========================
-   iPhone SOUND UNLOCK (1 tap)
-   ========================= */
-let soundEnabled = localStorage.getItem("soundEnabled") === "1";
-const gate = document.getElementById("gate");
-const enableBtn = document.getElementById("enableBtn");
 
-function unlockAudio(){
-  try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    ctx.resume();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    g.gain.value = 0;
-    o.connect(g); g.connect(ctx.destination);
-    o.start(); o.stop(ctx.currentTime + 0.01);
-  }catch(e){}
-}
+/* ==============================
+   AUDIO + AUTO GERMAN + FEEDBACK
+   ============================== */
 
-function enableSound(){
-  soundEnabled = true;
-  localStorage.setItem("soundEnabled","1");
-  gate.classList.remove("show");
-  unlockAudio();
-  autoSpeak();
-}
-
-if(!soundEnabled){
-  gate.classList.add("show");
-}
-enableBtn.addEventListener("click", (e)=>{ e.preventDefault(); enableSound(); });
-
-/* =========================
-   Best German Voice
-   ========================= */
+let audioCtx = null;
 let bestVoice = null;
 
+/* Unlock audio for iPhone */
+function unlockAudio(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+}
+
+/* Pick best German voice */
 function pickBestVoice(){
   if(!('speechSynthesis' in window)) return;
   const voices = speechSynthesis.getVoices();
-  if(!voices || !voices.length) return;
-
   bestVoice =
-    voices.find(v => (v.lang||"").toLowerCase().startsWith("de") && /premium|enhanced|google|natural/i.test(v.name||"")) ||
-    voices.find(v => (v.lang||"").toLowerCase().startsWith("de") && /siri|anna|markus|helena/i.test(v.name||"")) ||
-    voices.find(v => (v.lang||"").toLowerCase().startsWith("de")) ||
+    voices.find(v => v.lang && v.lang.startsWith("de") && /premium|enhanced|google|natural/i.test(v.name))
+    ||
+    voices.find(v => v.lang && v.lang.startsWith("de"))
+    ||
     null;
 }
 
 if('speechSynthesis' in window){
   pickBestVoice();
   speechSynthesis.onvoiceschanged = pickBestVoice;
-  // iOS triggers
-  speechSynthesis.getVoices();
 }
 
+/* Auto speak German */
 function speakGerman(text){
-  if(!soundEnabled) return;
   if(!('speechSynthesis' in window)) return;
 
-  pickBestVoice();
   speechSynthesis.cancel();
-
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "de-DE";
   u.rate = 0.9;
   if(bestVoice) u.voice = bestVoice;
-
   speechSynthesis.speak(u);
 }
 
 function autoSpeak(){
-  if(!soundEnabled) return;
-  const w = document.getElementById("word").innerText;
-  setTimeout(()=>speakGerman(w), 150);
+  const w = document.getElementById("word");
+  if(w){
+    setTimeout(()=> speakGerman(w.innerText), 150);
+  }
 }
 
-/* =========================
-   Correct / Wrong sound (stable)
-   ========================= */
+/* Correct sound */
 function playCorrect(){
-  if(!soundEnabled) return;
-  try{
-    const a = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
-    a.play().catch(()=>{});
-  }catch(e){}
-}
-function playWrong(){
-  if(!soundEnabled) return;
-  try{
-    const a = new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3");
-    a.play().catch(()=>{});
-  }catch(e){}
+  if(!audioCtx) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = "triangle";
+  o.frequency.setValueAtTime(900, audioCtx.currentTime);
+  g.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+  o.connect(g);
+  g.connect(audioCtx.destination);
+  o.start();
+  o.stop(audioCtx.currentTime + 0.25);
 }
 
-/* =========================
-   UI helpers
-   ========================= */
+/* Wrong sound */
+function playWrong(){
+  if(!audioCtx) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = "sawtooth";
+  o.frequency.setValueAtTime(180, audioCtx.currentTime);
+  g.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+  o.connect(g);
+  g.connect(audioCtx.destination);
+  o.start();
+  o.stop(audioCtx.currentTime + 0.3);
+}
+
+/* Feedback */
 function setFeedback(type){
   const fb = document.getElementById("fb");
+
   if(type === "correct"){
     fb.textContent = "Correct";
     fb.className = "feedback correct";
     playCorrect();
-    const scoreEl = document.getElementById("scoreValue");
-    scoreEl.classList.add("bounce");
-    setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
-  } else if(type === "wrong"){
+  }
+  else if(type === "wrong"){
     fb.textContent = "Wrong";
     fb.className = "feedback wrong";
     playWrong();
-  } else {
+  }
+  else{
     fb.textContent = "";
     fb.className = "feedback";
   }
 }
 
-function renderOptions(options){
-  const wrap = document.getElementById("answers");
-  wrap.innerHTML = "";
-  options.forEach(opt=>{
-    const b = document.createElement("button");
-    b.className = "answer";
-    b.dataset.answer = opt;
-    b.textContent = opt;
-    b.addEventListener("click", onAnswerClick);
-    wrap.appendChild(b);
-  });
-}
+/* Apply state */
+function applyState(data, feedbackToShow){
 
-function setActiveCategory(cat){
-  document.querySelectorAll(".cat").forEach(x=>{
-    x.classList.toggle("active", x.dataset.cat === cat);
-  });
-}
-
-/* =========================
-   API calls (NO reload)
-   ========================= */
-async function apiPost(url, data){
-  const r = await fetch(url, {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify(data || {})
-  });
-  return await r.json();
-}
-
-async function refreshState(){
-  const r = await fetch("/api/state");
-  const data = await r.json();
-  applyState(data, "");
-}
-
-function applyState(data, overrideFeedback){
   document.getElementById("word").textContent = data.german;
   document.getElementById("scoreValue").textContent = data.score;
   document.getElementById("totalValue").textContent = data.total;
@@ -357,50 +228,53 @@ function applyState(data, overrideFeedback){
   document.getElementById("levelNum").textContent = data.level_number;
   document.getElementById("catName").textContent = (data.selected_level || "").toUpperCase();
   document.getElementById("wrongTab").textContent = "Wrong (" + (data.wrong_count || 0) + ")";
-  setActiveCategory(data.selected_level || "a1");
-  renderOptions(data.options || []);
-  setFeedback(overrideFeedback || data.feedback || "");
-  autoSpeak(); // <-- otomatik okuma (iPhone: enable sonrası %100)
+
+  setFeedback(feedbackToShow || "");
+  autoSpeak();
 }
 
-/* =========================
-   Events
-   ========================= */
+/* Answer click */
 async function onAnswerClick(e){
   e.preventDefault();
-  if(!soundEnabled){
-    gate.classList.add("show");
-    return;
-  }
   unlockAudio();
+
   const ans = e.currentTarget.dataset.answer;
-  const data = await apiPost("/api/answer", { answer: ans });
+
+  const data = await fetch("/api/answer", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ answer: ans })
+  }).then(r=>r.json());
+
   applyState(data, data.feedback);
 }
 
-document.querySelectorAll(".answer").forEach(b=>b.addEventListener("click", onAnswerClick));
-
-document.getElementById("listenBtn").addEventListener("click", ()=>{
-  if(!soundEnabled){
-    gate.classList.add("show");
-    return;
-  }
-  unlockAudio();
-  autoSpeak();
+document.querySelectorAll(".answer").forEach(b=>{
+  b.addEventListener("click", onAnswerClick);
 });
 
+/* Category click */
 document.querySelectorAll(".cat").forEach(tab=>{
   tab.addEventListener("click", async ()=>{
+    unlockAudio();
     const cat = tab.dataset.cat;
-    const data = await apiPost("/api/set_category", { category: cat });
+
+    const data = await fetch("/api/set_category", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ category: cat })
+    }).then(r=>r.json());
+
     applyState(data, "");
   });
 });
 
+/* On load */
 window.addEventListener("load", ()=>{
-  // ensure we are synced + auto speak if enabled
-  refreshState();
+  autoSpeak();
 });
+
 </script>
+
 </body>
 </html>
