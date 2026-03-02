@@ -1,127 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Deutsch Quiz</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#1e3c72,#2a5298);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-}
-.card{
-  background:#fff;
-  width:95%;
-  max-width:900px;
-  padding:22px;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.30);
-  text-align:center;
-}
-.catbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  margin-bottom:14px;
-}
-.cat{
-  padding:7px 12px;
-  border-radius:10px;
-  background:#eef2ff;
-  cursor:pointer;
-  font-weight:700;
-  border:1px solid #d8def0;
-}
-.cat.active{
-  background:#2a5298;
-  color:#fff;
-  border-color:#2a5298;
-}
-.stats{
-  font-size:14px;
-  margin-bottom:10px;
-}
-.score{
-  font-weight:800;
-}
-#word{
-  margin:14px 0;
-  font-size:30px;
-  font-weight:900;
-}
-.answer{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:none;
-  border-radius:12px;
-  background:#2a5298;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-.feedback{
-  height:26px;
-  font-weight:900;
-  font-size:18px;
-  margin:8px 0;
-}
-.correct{ color:#16a34a; }
-.wrong{ color:#dc2626; }
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
+  .card{
+    background:#fff;
+    width:95%;
+    max-width:900px;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.30);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  @media(min-width:900px){
+    .card{ padding:40px; }
+    #word{ font-size:40px; }
+  }
+  @media(max-width:450px){
+    #word{ font-size:26px; }
+    .cat{ font-size:13px; padding:6px 10px; }
+  }
+
+  .catbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+  .cat{
+    text-decoration:none;
+    padding:7px 12px;
+    border-radius:10px;
+    background:#eef2ff;
+    color:#1f2a44;
+    font-weight:700;
+    border:1px solid #d8def0;
+    cursor:pointer;
+    user-select:none;
+  }
+  .cat.active{
+    background:#2a5298;
+    color:#fff;
+    border-color:#2a5298;
+  }
+
+  .stats{
+    font-size:14px;
+    color:#334;
+    margin-bottom:10px;
+  }
+  .score{
+    display:inline-block;
+    font-weight:800;
+  }
+
+  #word{
+    margin:14px 0 10px 0;
+    font-size:32px;
+    font-weight:900;
+  }
+
+  .listen{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:10px;
+  }
+
+  .answers{ margin-top:6px; }
+
+  .answer{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    background:#2a5298;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .answer:active{ transform:scale(0.98); }
+
+  .feedback{
+    height:26px;
+    font-weight:900;
+    font-size:18px;
+    margin:8px 0 2px 0;
+  }
+  .correct{ color:#16a34a; }
+  .wrong{ color:#dc2626; }
+
+  /* (iOS) first-tap helper */
+  .tip{
+    margin-top:8px;
+    font-size:12px;
+    color:#667;
+  }
 </style>
 </head>
 
 <body>
-
 <div class="card">
 
-<div class="catbar">
-<span class="cat" data-cat="a1">A1</span>
-<span class="cat" data-cat="a2">A2</span>
-<span class="cat" data-cat="hotel">Hotel</span>
-<span class="cat" data-cat="verb">Verb</span>
-<span class="cat" data-cat="pronouns">Pronouns</span>
-<span class="cat" data-cat="mixed">Mixed</span>
-<span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
-</div>
+  <div class="catbar" id="catbar">
+    <span class="cat" data-cat="a1">A1</span>
+    <span class="cat" data-cat="a2">A2</span>
+    <span class="cat" data-cat="hotel">Hotel</span>
+    <span class="cat" data-cat="verb">Verb</span>
+    <span class="cat" data-cat="pronouns">Pronouns</span>
+    <span class="cat" data-cat="mixed">Mixed</span>
+    <span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
+  </div>
 
-<div class="stats">
-Category: <span id="catName">{{selected_level|upper}}</span> |
-Level <span id="levelNum">{{level_number}}</span> |
-XP <span id="xpVal">{{xp}}</span> |
-Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
-</div>
+  <div class="stats">
+    Category: <span id="catName">{{selected_level|upper}}</span> |
+    Level <span id="levelNum">{{level_number}}</span> |
+    XP <span id="xpVal">{{xp}}</span> |
+    Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
+  </div>
 
-<div id="word">{{german}}</div>
+  <div id="word">{{german}}</div>
 
-<div id="fb" class="feedback"></div>
+  <button class="listen" id="listenBtn" type="button">🔊 Listen (German)</button>
 
-<div id="answers">
-{% for o in options %}
-<button class="answer" data-answer="{{o}}">{{o}}</button>
-{% endfor %}
-</div>
+  <div id="fb" class="feedback"></div>
+
+  <div class="answers" id="answers">
+    {% for o in options %}
+      <button class="answer" type="button" data-answer="{{o}}">{{o}}</button>
+    {% endfor %}
+  </div>
+
+  <div class="tip">iPhone: İlk ses için bir kere Listen’a bas (sonra otomatik devam eder).</div>
 
 </div>
 
 <script>
+/* =========================================
+   FINAL FIX:
+   - Options re-render + click binding
+   - Better German voice pick (Siri/Enhanced)
+   - Auto pronunciation (after question changes)
+   - Correct chime + Wrong "dit" louder
+   ========================================= */
 
-/* ==============================
-   AUDIO + AUTO GERMAN + FEEDBACK
-   ============================== */
-
+/* ---------- Audio unlock + SFX ---------- */
 let audioCtx = null;
-let bestVoice = null;
 
-/* Unlock audio for iPhone */
-function unlockAudio(){
+function ensureAudio(){
   if(!audioCtx){
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
@@ -130,75 +177,133 @@ function unlockAudio(){
   }
 }
 
-/* Pick best German voice */
+/* Correct: nicer 2-tone chime (louder) */
+function playCorrect(){
+  if(!audioCtx) return;
+
+  const t = audioCtx.currentTime;
+  const g = audioCtx.createGain();
+  g.gain.setValueAtTime(0.001, t);
+  g.gain.exponentialRampToValueAtTime(0.9, t + 0.02);     // louder
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+
+  const o1 = audioCtx.createOscillator();
+  o1.type = "sine";
+  o1.frequency.setValueAtTime(880, t);
+
+  const o2 = audioCtx.createOscillator();
+  o2.type = "sine";
+  o2.frequency.setValueAtTime(1320, t + 0.08);
+
+  o1.connect(g); o2.connect(g); g.connect(audioCtx.destination);
+
+  o1.start(t);
+  o1.stop(t + 0.20);
+
+  o2.start(t + 0.08);
+  o2.stop(t + 0.28);
+}
+
+/* Wrong: short “dit” (louder) */
+function playWrong(){
+  if(!audioCtx) return;
+
+  const t = audioCtx.currentTime;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+
+  o.type = "square";
+  o.frequency.setValueAtTime(650, t);
+
+  g.gain.setValueAtTime(0.001, t);
+  g.gain.exponentialRampToValueAtTime(0.85, t + 0.01);    // louder
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(t);
+  o.stop(t + 0.12);
+}
+
+/* ---------- Best German TTS voice ---------- */
+let bestVoice = null;
+let voicesReady = false;
+
+function scoreVoice(v){
+  const name = (v.name || "").toLowerCase();
+  const lang = (v.lang || "").toLowerCase();
+  let s = 0;
+
+  if(lang.startsWith("de")) s += 1000;
+  if(lang === "de-de") s += 200;
+
+  // Prefer higher quality voices
+  if(name.includes("siri")) s += 500;
+  if(name.includes("premium")) s += 400;
+  if(name.includes("enhanced")) s += 350;
+  if(name.includes("natural")) s += 300;
+  if(name.includes("google")) s += 250;
+
+  if(v.default) s += 50;
+
+  // Avoid clearly non-german voices
+  if(lang.startsWith("en")) s -= 500;
+
+  return s;
+}
+
 function pickBestVoice(){
   if(!('speechSynthesis' in window)) return;
   const voices = speechSynthesis.getVoices();
-  bestVoice =
-    voices.find(v => v.lang && v.lang.startsWith("de") && /premium|enhanced|google|natural/i.test(v.name))
-    ||
-    voices.find(v => v.lang && v.lang.startsWith("de"))
-    ||
-    null;
+  if(!voices || !voices.length) return;
+
+  voicesReady = true;
+  const german = voices.filter(v => (v.lang || "").toLowerCase().startsWith("de"));
+  if(!german.length){
+    bestVoice = null;
+    return;
+  }
+  german.sort((a,b)=>scoreVoice(b)-scoreVoice(a));
+  bestVoice = german[0];
 }
 
 if('speechSynthesis' in window){
   pickBestVoice();
   speechSynthesis.onvoiceschanged = pickBestVoice;
+  // trigger on iOS
+  setTimeout(()=>{ try{ speechSynthesis.getVoices(); }catch(e){} }, 50);
 }
 
-/* Auto speak German */
 function speakGerman(text){
   if(!('speechSynthesis' in window)) return;
 
+  pickBestVoice();
   speechSynthesis.cancel();
+
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "de-DE";
   u.rate = 0.9;
+  u.pitch = 1;
+
   if(bestVoice) u.voice = bestVoice;
+
   speechSynthesis.speak(u);
 }
 
 function autoSpeak(){
   const w = document.getElementById("word");
-  if(w){
-    setTimeout(()=> speakGerman(w.innerText), 150);
+  if(!w) return;
+
+  // iOS: voices may arrive late — retry a bit
+  const text = w.innerText;
+
+  setTimeout(()=> speakGerman(text), 180);
+  if(!voicesReady){
+    setTimeout(()=> speakGerman(text), 600);
+    setTimeout(()=> speakGerman(text), 1100);
   }
 }
 
-/* Correct sound */
-function playCorrect(){
-  if(!audioCtx) return;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.type = "triangle";
-  o.frequency.setValueAtTime(900, audioCtx.currentTime);
-  g.gain.setValueAtTime(0.001, audioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-  o.connect(g);
-  g.connect(audioCtx.destination);
-  o.start();
-  o.stop(audioCtx.currentTime + 0.25);
-}
-
-/* Wrong sound */
-function playWrong(){
-  if(!audioCtx) return;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.type = "sawtooth";
-  o.frequency.setValueAtTime(180, audioCtx.currentTime);
-  g.gain.setValueAtTime(0.001, audioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-  o.connect(g);
-  g.connect(audioCtx.destination);
-  o.start();
-  o.stop(audioCtx.currentTime + 0.3);
-}
-
-/* Feedback */
+/* ---------- Feedback UI ---------- */
 function setFeedback(type){
   const fb = document.getElementById("fb");
 
@@ -206,21 +311,41 @@ function setFeedback(type){
     fb.textContent = "Correct";
     fb.className = "feedback correct";
     playCorrect();
-  }
-  else if(type === "wrong"){
+  } else if(type === "wrong"){
     fb.textContent = "Wrong";
     fb.className = "feedback wrong";
     playWrong();
-  }
-  else{
+  } else {
     fb.textContent = "";
     fb.className = "feedback";
   }
 }
 
-/* Apply state */
-function applyState(data, feedbackToShow){
+/* ---------- Render options (FIX: options must change!) ---------- */
+function renderOptions(options){
+  const wrap = document.getElementById("answers");
+  wrap.innerHTML = "";
 
+  (options || []).forEach(opt=>{
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "answer";
+    b.dataset.answer = opt;
+    b.textContent = opt;
+    b.addEventListener("click", onAnswerClick);
+    wrap.appendChild(b);
+  });
+}
+
+/* Category active style */
+function setActiveCategory(cat){
+  document.querySelectorAll(".cat").forEach(x=>{
+    x.classList.toggle("active", x.dataset.cat === cat);
+  });
+}
+
+/* Apply state (updates everything, including options) */
+function applyState(data, feedbackToShow){
   document.getElementById("word").textContent = data.german;
   document.getElementById("scoreValue").textContent = data.score;
   document.getElementById("totalValue").textContent = data.total;
@@ -228,53 +353,59 @@ function applyState(data, feedbackToShow){
   document.getElementById("levelNum").textContent = data.level_number;
   document.getElementById("catName").textContent = (data.selected_level || "").toUpperCase();
   document.getElementById("wrongTab").textContent = "Wrong (" + (data.wrong_count || 0) + ")";
+  setActiveCategory(data.selected_level || "a1");
 
-  setFeedback(feedbackToShow || "");
+  renderOptions(data.options || []);
+  setFeedback(feedbackToShow || data.feedback || "");
+
   autoSpeak();
 }
 
-/* Answer click */
-async function onAnswerClick(e){
-  e.preventDefault();
-  unlockAudio();
-
-  const ans = e.currentTarget.dataset.answer;
-
-  const data = await fetch("/api/answer", {
+/* ---------- API helpers ---------- */
+async function apiPost(url, data){
+  const r = await fetch(url, {
     method:"POST",
     headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ answer: ans })
-  }).then(r=>r.json());
+    body: JSON.stringify(data || {})
+  });
+  return await r.json();
+}
 
+async function refreshState(){
+  const r = await fetch("/api/state");
+  const data = await r.json();
+  applyState(data, "");
+}
+
+/* ---------- Events ---------- */
+async function onAnswerClick(e){
+  e.preventDefault();
+  ensureAudio(); // IMPORTANT: unlock on user tap
+
+  const ans = e.currentTarget.dataset.answer;
+  const data = await apiPost("/api/answer", { answer: ans });
   applyState(data, data.feedback);
 }
 
-document.querySelectorAll(".answer").forEach(b=>{
-  b.addEventListener("click", onAnswerClick);
+document.getElementById("listenBtn").addEventListener("click", ()=>{
+  ensureAudio();      // unlock audio for SFX too
+  autoSpeak();        // manual re-speak
 });
 
-/* Category click */
 document.querySelectorAll(".cat").forEach(tab=>{
   tab.addEventListener("click", async ()=>{
-    unlockAudio();
+    ensureAudio();
     const cat = tab.dataset.cat;
-
-    const data = await fetch("/api/set_category", {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ category: cat })
-    }).then(r=>r.json());
-
+    const data = await apiPost("/api/set_category", { category: cat });
     applyState(data, "");
   });
 });
 
-/* On load */
+/* Initial */
 window.addEventListener("load", ()=>{
-  autoSpeak();
+  refreshState();
 });
 
 </script>
-
 </body>
 </html>
