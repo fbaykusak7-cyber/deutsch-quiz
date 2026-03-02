@@ -1,258 +1,406 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Deutsch Quiz</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#1e3c72,#2a5298);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-}
-.card{
-  background:#fff;
-  width:95%;
-  max-width:900px;
-  padding:22px;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.30);
-  text-align:center;
-}
-.catbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
-  margin-bottom:14px;
-}
-.cat{
-  padding:7px 12px;
-  border-radius:10px;
-  background:#eef2ff;
-  cursor:pointer;
-  font-weight:700;
-}
-.cat.active{
-  background:#2a5298;
-  color:#fff;
-}
-.stats{
-  font-size:14px;
-  margin-bottom:10px;
-}
-#word{
-  margin:14px 0;
-  font-size:30px;
-  font-weight:900;
-}
-.answer{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:none;
-  border-radius:12px;
-  background:#2a5298;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-.feedback{
-  height:26px;
-  font-weight:900;
-  font-size:18px;
-  margin:8px 0;
-}
-.correct{ color:#16a34a; }
-.wrong{ color:#dc2626; }
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
+  .card{
+    background:#fff;
+    width:95%;
+    max-width:900px;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.30);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  @media(min-width:900px){
+    .card{ padding:40px; }
+    #word{ font-size:40px; }
+  }
+  @media(max-width:450px){
+    #word{ font-size:26px; }
+    .cat{ font-size:13px; padding:6px 10px; }
+  }
+
+  .catbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+  .cat{
+    text-decoration:none;
+    padding:7px 12px;
+    border-radius:10px;
+    background:#eef2ff;
+    color:#1f2a44;
+    font-weight:700;
+    border:1px solid #d8def0;
+    cursor:pointer;
+  }
+  .cat.active{
+    background:#2a5298;
+    color:#fff;
+    border-color:#2a5298;
+  }
+
+  .stats{
+    font-size:14px;
+    color:#334;
+    margin-bottom:10px;
+  }
+  .score{
+    display:inline-block;
+    font-weight:800;
+  }
+  .bounce{ animation:bounce 0.35s; }
+  @keyframes bounce{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.45);}
+    100%{transform:scale(1);}
+  }
+
+  #word{
+    margin:14px 0 10px 0;
+    font-size:32px;
+    font-weight:900;
+  }
+
+  .listen{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#111827;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:10px;
+  }
+
+  .answers{
+    margin-top:6px;
+  }
+
+  .answer{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    background:#2a5298;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .answer:active{ transform:scale(0.98); }
+
+  .feedback{
+    height:26px;
+    font-weight:900;
+    font-size:18px;
+    margin:8px 0 2px 0;
+  }
+  .correct{ color:#16a34a; }
+  .wrong{ color:#dc2626; }
+
+  /* iPhone sound gate */
+  .gate{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:9999;
+  }
+  .gate.show{ display:flex; }
+  .gatebox{
+    background:#fff;
+    border-radius:16px;
+    padding:18px;
+    max-width:520px;
+    width:100%;
+    text-align:center;
+  }
+  .gatebtn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#2a5298;
+    color:#fff;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+  }
 </style>
 </head>
 
 <body>
-
 <div class="card">
 
-<div class="catbar" id="catbar">
-<span class="cat" data-cat="a1">A1</span>
-<span class="cat" data-cat="a2">A2</span>
-<span class="cat" data-cat="hotel">Hotel</span>
-<span class="cat" data-cat="verb">Verb</span>
-<span class="cat" data-cat="pronouns">Pronouns</span>
-<span class="cat" data-cat="mixed">Mixed</span>
-<span class="cat" data-cat="wrong" id="wrongTab">Wrong ({{wrong_count}})</span>
-</div>
+  <div class="catbar" id="catbar">
+    <span class="cat" data-cat="a1">A1</span>
+    <span class="cat" data-cat="a2">A2</span>
+    <span class="cat" data-cat="hotel">Hotel</span>
+    <span class="cat" data-cat="verb">Verb</span>
+    <span class="cat" data-cat="pronouns">Pronouns</span>
+    <span class="cat" data-cat="mixed">Mixed</span>
+    <span class="cat" data-cat="wrong" id="wrongTab">Wrong (0)</span>
+  </div>
 
-<div class="stats">
-Category: <span id="catName">{{selected_level|upper}}</span> |
-Level <span id="levelNum">{{level_number}}</span> |
-XP <span id="xpVal">{{xp}}</span> |
-Score <span id="scoreValue">{{score}}</span> / <span id="totalValue">{{total}}</span>
-</div>
+  <div class="stats">
+    Category: <span id="catName">{{selected_level|upper}}</span> |
+    Level <span id="levelNum">{{level_number}}</span> |
+    XP <span id="xpVal">{{xp}}</span> |
+    Score <span id="scoreValue" class="score">{{score}}</span> / <span id="totalValue">{{total}}</span>
+  </div>
 
-<div id="word">{{german}}</div>
+  <div id="word">{{german}}</div>
 
-<div id="fb" class="feedback"></div>
+  <button class="listen" id="listenBtn">Listen (German)</button>
 
-<div id="answers">
-{% for o in options %}
-<button class="answer" data-answer="{{o}}">{{o}}</button>
-{% endfor %}
-</div>
+  <div id="fb" class="feedback"></div>
+
+  <div class="answers" id="answers">
+    {% for o in options %}
+      <button class="answer" data-answer="{{o}}">{{o}}</button>
+    {% endfor %}
+  </div>
+
+  <div id="gate" class="gate">
+    <div class="gatebox">
+      <h3>Enable Sound</h3>
+      <p>iPhone/Safari için ses izni gerekir. Bir kere açınca otomatik konuşma ve doğru/yanlış sesleri çalışır.</p>
+      <button class="gatebtn" id="enableBtn">Enable sound</button>
+    </div>
+  </div>
 
 </div>
 
 <script>
+/* =========================
+   iPhone SOUND UNLOCK (1 tap)
+   ========================= */
+let soundEnabled = localStorage.getItem("soundEnabled") === "1";
+const gate = document.getElementById("gate");
+const enableBtn = document.getElementById("enableBtn");
+
+function unlockAudio(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    g.gain.value = 0;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.01);
+  }catch(e){}
+}
+
+function enableSound(){
+  soundEnabled = true;
+  localStorage.setItem("soundEnabled","1");
+  gate.classList.remove("show");
+  unlockAudio();
+  autoSpeak();
+}
+
+if(!soundEnabled){
+  gate.classList.add("show");
+}
+enableBtn.addEventListener("click", (e)=>{ e.preventDefault(); enableSound(); });
 
 /* =========================
-   CLEAN GERMAN TTS SYSTEM
+   Best German Voice
    ========================= */
-
-let userInteracted = false;
 let bestVoice = null;
 
-/* Pick best German voice */
 function pickBestVoice(){
   if(!('speechSynthesis' in window)) return;
-
   const voices = speechSynthesis.getVoices();
   if(!voices || !voices.length) return;
 
-  const german = voices.filter(v =>
-    v.lang && v.lang.toLowerCase().startsWith("de")
-  );
-
-  if(!german.length) return;
-
-  bestVoice = german.find(v =>
-    /premium|enhanced|google|natural|siri/i.test(v.name)
-  ) || german[0];
+  bestVoice =
+    voices.find(v => (v.lang||"").toLowerCase().startsWith("de") && /premium|enhanced|google|natural/i.test(v.name||"")) ||
+    voices.find(v => (v.lang||"").toLowerCase().startsWith("de") && /siri|anna|markus|helena/i.test(v.name||"")) ||
+    voices.find(v => (v.lang||"").toLowerCase().startsWith("de")) ||
+    null;
 }
 
 if('speechSynthesis' in window){
   pickBestVoice();
   speechSynthesis.onvoiceschanged = pickBestVoice;
+  // iOS triggers
+  speechSynthesis.getVoices();
 }
 
 function speakGerman(text){
-  if(!userInteracted) return;
+  if(!soundEnabled) return;
+  if(!('speechSynthesis' in window)) return;
 
-  try{ speechSynthesis.cancel(); }catch(e){}
+  pickBestVoice();
+  speechSynthesis.cancel();
 
   const u = new SpeechSynthesisUtterance(text);
-  u.lang="de-DE";
-  u.rate=0.9;
-
-  if(bestVoice){
-    u.voice = bestVoice;
-  }
+  u.lang = "de-DE";
+  u.rate = 0.9;
+  if(bestVoice) u.voice = bestVoice;
 
   speechSynthesis.speak(u);
 }
 
 function autoSpeak(){
-  const w=document.getElementById("word");
-  if(w){
-    setTimeout(()=>speakGerman(w.innerText),200);
-  }
+  if(!soundEnabled) return;
+  const w = document.getElementById("word").innerText;
+  setTimeout(()=>speakGerman(w), 150);
 }
 
-/* Unlock after first interaction (iOS rule) */
-document.addEventListener("click",()=>{
-  userInteracted=true;
-},{once:true});
+/* =========================
+   Correct / Wrong sound (stable)
+   ========================= */
+function playCorrect(){
+  if(!soundEnabled) return;
+  try{
+    const a = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+    a.play().catch(()=>{});
+  }catch(e){}
+}
+function playWrong(){
+  if(!soundEnabled) return;
+  try{
+    const a = new Audio("https://www.soundjay.com/buttons/sounds/button-10.mp3");
+    a.play().catch(()=>{});
+  }catch(e){}
+}
 
 /* =========================
-   UI + AJAX
+   UI helpers
    ========================= */
-
 function setFeedback(type){
-  const fb=document.getElementById("fb");
-
-  if(type==="correct"){
-    fb.textContent="Correct";
-    fb.className="feedback correct";
-  }
-  else if(type==="wrong"){
-    fb.textContent="Wrong";
-    fb.className="feedback wrong";
-  }
-  else{
-    fb.textContent="";
-    fb.className="feedback";
+  const fb = document.getElementById("fb");
+  if(type === "correct"){
+    fb.textContent = "Correct";
+    fb.className = "feedback correct";
+    playCorrect();
+    const scoreEl = document.getElementById("scoreValue");
+    scoreEl.classList.add("bounce");
+    setTimeout(()=>scoreEl.classList.remove("bounce"), 400);
+  } else if(type === "wrong"){
+    fb.textContent = "Wrong";
+    fb.className = "feedback wrong";
+    playWrong();
+  } else {
+    fb.textContent = "";
+    fb.className = "feedback";
   }
 }
 
 function renderOptions(options){
-  const wrap=document.getElementById("answers");
-  wrap.innerHTML="";
-
+  const wrap = document.getElementById("answers");
+  wrap.innerHTML = "";
   options.forEach(opt=>{
-    const b=document.createElement("button");
-    b.className="answer";
-    b.dataset.answer=opt;
-    b.textContent=opt;
+    const b = document.createElement("button");
+    b.className = "answer";
+    b.dataset.answer = opt;
+    b.textContent = opt;
+    b.addEventListener("click", onAnswerClick);
     wrap.appendChild(b);
   });
 }
 
-function applyState(data){
-  document.getElementById("word").textContent=data.german;
-  document.getElementById("scoreValue").textContent=data.score;
-  document.getElementById("totalValue").textContent=data.total;
-  document.getElementById("xpVal").textContent=data.xp;
-  document.getElementById("levelNum").textContent=data.level_number;
-  document.getElementById("catName").textContent=(data.selected_level||"").toUpperCase();
-  document.getElementById("wrongTab").textContent="Wrong ("+(data.wrong_count||0)+")";
-
-  renderOptions(data.options||[]);
-  setFeedback(data.feedback||"");
-  autoSpeak();
+function setActiveCategory(cat){
+  document.querySelectorAll(".cat").forEach(x=>{
+    x.classList.toggle("active", x.dataset.cat === cat);
+  });
 }
 
-async function apiPost(url,data){
-  const r=await fetch(url,{
+/* =========================
+   API calls (NO reload)
+   ========================= */
+async function apiPost(url, data){
+  const r = await fetch(url, {
     method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(data||{})
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify(data || {})
   });
   return await r.json();
 }
 
-async function refresh(){
-  const r=await fetch("/api/state");
-  const data=await r.json();
-  applyState(data);
+async function refreshState(){
+  const r = await fetch("/api/state");
+  const data = await r.json();
+  applyState(data, "");
 }
 
-document.getElementById("answers").addEventListener("click",async(e)=>{
-  const btn=e.target.closest(".answer");
-  if(!btn) return;
+function applyState(data, overrideFeedback){
+  document.getElementById("word").textContent = data.german;
+  document.getElementById("scoreValue").textContent = data.score;
+  document.getElementById("totalValue").textContent = data.total;
+  document.getElementById("xpVal").textContent = data.xp;
+  document.getElementById("levelNum").textContent = data.level_number;
+  document.getElementById("catName").textContent = (data.selected_level || "").toUpperCase();
+  document.getElementById("wrongTab").textContent = "Wrong (" + (data.wrong_count || 0) + ")";
+  setActiveCategory(data.selected_level || "a1");
+  renderOptions(data.options || []);
+  setFeedback(overrideFeedback || data.feedback || "");
+  autoSpeak(); // <-- otomatik okuma (iPhone: enable sonrası %100)
+}
 
-  userInteracted=true;
+/* =========================
+   Events
+   ========================= */
+async function onAnswerClick(e){
+  e.preventDefault();
+  if(!soundEnabled){
+    gate.classList.add("show");
+    return;
+  }
+  unlockAudio();
+  const ans = e.currentTarget.dataset.answer;
+  const data = await apiPost("/api/answer", { answer: ans });
+  applyState(data, data.feedback);
+}
 
-  const ans=btn.dataset.answer;
-  const data=await apiPost("/api/answer",{answer:ans});
-  applyState(data);
+document.querySelectorAll(".answer").forEach(b=>b.addEventListener("click", onAnswerClick));
+
+document.getElementById("listenBtn").addEventListener("click", ()=>{
+  if(!soundEnabled){
+    gate.classList.add("show");
+    return;
+  }
+  unlockAudio();
+  autoSpeak();
 });
 
-document.getElementById("catbar").addEventListener("click",async(e)=>{
-  const tab=e.target.closest(".cat");
-  if(!tab) return;
-
-  userInteracted=true;
-
-  const data=await apiPost("/api/set_category",{category:tab.dataset.cat});
-  applyState(data);
+document.querySelectorAll(".cat").forEach(tab=>{
+  tab.addEventListener("click", async ()=>{
+    const cat = tab.dataset.cat;
+    const data = await apiPost("/api/set_category", { category: cat });
+    applyState(data, "");
+  });
 });
 
-window.addEventListener("load",refresh);
-
+window.addEventListener("load", ()=>{
+  // ensure we are synced + auto speak if enabled
+  refreshState();
+});
 </script>
-
 </body>
 </html>
